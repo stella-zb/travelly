@@ -2,11 +2,10 @@ const express = require("express");
 const routes = express.Router();
 
 routes.get("/", (req, res) => {
-  res.send("Home Page");
-});
-
-routes.get("/login", (req, res) => {
-  res.send("Login Page");
+  // res.send("Home Page");
+  // check if user login in
+  // else redirect to login in
+  res.redirect("/login");
 });
 
 routes.get("/signup", (req, res) => {
