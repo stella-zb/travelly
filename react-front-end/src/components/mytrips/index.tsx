@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import { CityList } from './CityList';
-import { AttractionList } from './AttractionList';
-
+import { Trip } from './Trip';
+import {Invite} from './Invite';
 
 export const TripsIndex = () => {
 
   return (
     <>
-    <Router>
-      <Switch>
-        <Route exact path='/trips'><CityList cities="cities" /></Route>
-        <Route exact path='/trips/vancouver'><AttractionList city="Vancouver" attractions="attractions" /></Route>
-      </Switch>
-    </Router>
-
+    <Switch>
+      <Route exact path='/trips'><CityList /></Route>
+      <Route path='/trips/:id'><Trip /></Route>
+    </Switch>
     </>
   )
 }

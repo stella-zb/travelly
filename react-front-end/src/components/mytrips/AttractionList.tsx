@@ -1,27 +1,27 @@
-import React, {useEffect} from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
-import add from '../../images/add-contact.svg';
 import { Button } from './Button';
-
-type PropTypes = { city: string, attractions: string }
+import { InviteIcon } from './InviteIcon';
+import addattr from '../../images/addpin.svg';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const Attractions = styled.ul`
   padding-left: 0px;
 `;
 
-const AttractionItem = styled(Link)`
+const AttractionItem = styled.li`
   text-decoration: none;
   list-style-type: none;
+  padding: 25px;
 `;
 
 const Title = styled.h1`
   text-align: left;
 `;
 
-const Add = styled.img`
+const AddAttr = styled.img`
   width: 40px;
 `;
 
@@ -33,30 +33,57 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-export const AttractionList = ({city, attractions}: PropTypes) => {
+type PropTypes = {
+  id: string,
+  attractions: Array<any>,
+  deleteAttraction: any,
+  setInvite: any,
+  generate: any
+}
 
-  useEffect(() => {
-    Promise.all([
-      Promise.resolve(axios.get('/api/trips/:id'))
-    ])
-    .then((res) => {
-      console.log(res)
+export const AttractionList = ({ id, attractions, deleteAttraction, setInvite, generate }: PropTypes) => {
+
+  const [edit, setEdit] = useState<boolean>(false);
+
+  const updateItinerary = () => {
+    axios.get(`/api/itineraries/${id}`, {
+      params: {
+        user: localStorage.userID
+      }
     })
-  })
+    .then(() => {
+      setEdit(true);
+    })
+  };
+
 
   return (
     <>
-    <Header>
-      <Title>{city}</Title>
-      <Add src={add} />
-    </Header>
+      {edit && <Redirect to={`/explore/${id}`} />}
+      <Header>
+        <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
+        <div>
+          <AddAttr src={addattr} onClick={updateItinerary} />
+          <InviteIcon id={id} setInvite={setInvite} />
+        </div>
+      </Header>
 
-    <Attractions>
-      <AttractionItem to='/vancouver'><Attraction name="Coal Harbour" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" /></AttractionItem>
-      <AttractionItem to='/seattle'><Attraction name="Stanley Park" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" /></AttractionItem>
-    </Attractions>
+      <Attractions>
+        {attractions.map(attraction =>
+          <AttractionItem key={attraction.id}>
+            <Attraction
+              id={attraction.attraction_id}
+              name={attraction.name}
+              img={attraction.photo}
+              editable={true}
+              deleteAttraction={deleteAttraction}
+              submitter={attraction.first_name}
+            />
+          </AttractionItem>
+        )}
+      </Attractions>
 
-    <Button text="Generate" />
+      <Button text="Generate" click={generate} />
     </>
   )
 }
