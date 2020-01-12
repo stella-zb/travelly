@@ -12,14 +12,14 @@ interface User {
   facebook?: string;
 }
 
-export const Profile = () => {
+export const Profile = (setLogout: any) => {
 
   // const userID = window.localStorage.getItem('userID');
   const [user, setUser] = useState({} as User);
 
   useEffect(() => {
     // Axios.get(`/profile/${userID}`)
-    Axios.get(`/profile`, {params: {user: localStorage.userID}})
+    Axios.get(`/profile`, { params: { user: localStorage.userID } })
       .then((res) => {
         // console.log(res.data)
         setUser(res.data)
@@ -31,14 +31,14 @@ export const Profile = () => {
     Axios.post(`/logout`)
       .then((res) => {
         setUser(res.data)
-        localStorage.setItem('userID', '0')
+        localStorage.clear()
       })
-      .then(() => console.log('USER IN LOGOUT IS', user))
+      .then(() => setLogout())
       .catch(err => console.log(err));
   }
 
   return (
-    !user ? <Redirect to='/' /> :
+    user && <>
       <UserInfo onSubmit={logout}>
         <MainInfo>
           <Avatar
@@ -59,5 +59,6 @@ export const Profile = () => {
           <Button type="submit">Login Out</Button>
         </MainInfo>
       </UserInfo>
+    </>
   )
 };
