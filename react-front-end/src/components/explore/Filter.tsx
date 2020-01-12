@@ -55,37 +55,55 @@ export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
     )
   }, []);
 
-  handleSubmit = () => {
+  // console.log(filters);
 
+  handleSubmit = (e) => {  
+    console.log('sn1>>>',filters);
+    let selectedFilter: Array<any>;
+    selectedFilter = [];
+    filters.map(filter => {
+      if (filter.select === true) {
+        selectedFilter.push(filter.category);
+      };
+      return selectedFilter;
+    });
+    
+    console.log('sn2>>>', selectedFilter);
+    console.log('sn3>>>',attractions)
+    const filterAttractions = attractions.filter(attraction => selectedFilter.includes(attraction.category))
+      
+    console.log('sn4>>>',filterAttractions);
   };
 
   return (
     <Fragment>
       <Button>Filter</Button>
+      <form>
       <FilterTab>
         {filters.map((filter1) => (
           <div>
-          <Input
-            key={filter1.id}
-            type="checkbox"
-            name={`${filter1}`}
-            onChange={(e) => {
-              let checked = e.target.checked;
-              setFilters(
-                filters.map(filter2 => {
-                  if (filter2.id === filter1.id) {
-                    filter2.select = checked;
-                  }
-                  return filter2;
-                })
-              )}
-            }
-            checked={filter1.select}
-          />{filter1.category}
+            <Input
+              key={filter1.id}
+              type="checkbox"
+              name={`${filter1}`}
+              onChange={(e) => {
+                let checked = e.target.checked;
+                setFilters(
+                  filters.map(filter2 => {
+                    if (filter2.id === filter1.id) {
+                      filter2.select = checked;
+                    }
+                    return filter2;
+                  })
+                )}
+              }
+              checked={filter1.select}
+            />{filter1.category}
           </div>
         ))}
       </FilterTab>
-      <Button onClick={handleSubmit}>Set Filter</Button>
+      </form>
+      <Button type="submit" onClick={handleSubmit}>Set Filter</Button>
     </Fragment>
   );
 };
