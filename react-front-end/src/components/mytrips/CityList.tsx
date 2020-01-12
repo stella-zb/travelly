@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from './City';
+import moment from 'moment';
+import axios from 'axios';
 
-type PropTypes = { cities: string }
-
-const Cities = styled.ul`
-  padding-left: 0px;
-`;
+type PropTypes = { cities: Array<any>, deletedIds: Array<any> }
 
 const CityItem = styled(Link)`
   text-decoration: none;
@@ -19,27 +16,24 @@ const Title = styled.h1`
   text-align: center;  
 `
 
-export const CityList = ({cities}: PropTypes) => {
-
-  const [trips, setTrips] = useState([]);
-
+export const CityList = () => {
+  const [trips, setTrips] = useState<Array<any>>([]);
   useEffect(() => {
-    axios.get('/api/trips')
+    axios.get('/api/trips', {params: {user: localStorage.userID}})
     .then((res) => {
       setTrips(res.data)
-    })
-    .then(() => {
-      console.log(trips)
     })
   }, [])
 
   return (
     <>
     <Title>My Trips</Title>
-    <Cities>
-        <CityItem to='/trips/vancouver'><City name="Vancouver" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" start="start" end="end"/></CityItem>
-        <CityItem to='/trips/seattle'><City name="Seattle" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" start="start" end="end"/></CityItem>
-    </Cities>
+
+    {trips ? trips.map(city =>
+      <CityItem key={city.id} to={`/trips/${city.id}`}>
+        <City key={city.id} name={city.city} img={city.city_img} start={moment.unix(city.trip_start).format('MMM DD, YYYY')} end={moment.unix(city.trip_end).format('MMM DD, YYYY')} />
+      </CityItem>
+      ):<div>Loading</div>}
     </>
   )
 }

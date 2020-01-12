@@ -11,15 +11,17 @@ const morgan = require('morgan');
 const db = require('./db/connect')
 const cors = require('cors')
 
+
+
+App.use(cors({credentials: true, origin: 'http://localhost:3002'}));
 const cities = require('./routes/cities');
-
-
-App.use(cors());
 const trips = require('./routes/trips');
 const user = require('./routes/user');
 
+
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.urlencoded({ extended: true }));
+App.use(BodyParser.json())
 App.use(Express.static('public'));
 App.use(morgan('dev'));
 App.use(cookieParser({
@@ -28,7 +30,7 @@ App.use(cookieParser({
 }))
 
 // Connect all our routes to our application
-App.use('/', cities(db));
+App.use('/api/itineraries', cities(db));
 App.use('/api/trips', trips(db));
 App.use('/', user(db));
 

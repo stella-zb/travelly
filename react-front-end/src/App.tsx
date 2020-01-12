@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
+import useVisualMode from "./hooks/useVisualMode";
 import { LoginInForm } from './components/auth/LoginInForm';
+import { SignUpForm } from './components/auth/SignUpForm';
+import { Profile } from './components/profile/profile';
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -13,7 +16,7 @@ const NavList = styled.ul`
   padding-left: 0px;
 `;
 
-import { Explore } from "./components/Explore";
+import { Explore } from "./components/explore";
 const NavItem = styled(NavLink)`
   text-decoration: none;
   color: #000;
@@ -24,8 +27,21 @@ const NavDiv = styled.nav`
   bottom: 0px;
   width: 99%;
   z-index: 999;
+  background: #F4F4F9;
   border: 1px solid #000;
-  margin: 1px;
+  margin: 1px 1px 0px 1px;
+`;
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  margin: 20px;
+  padding: 10px 40px
+  border: none;
+  background-color: white;
+  border-bottom: 2px solid #00C3AB;
 `;
 
 export default function App() {
@@ -51,41 +67,69 @@ export default function App() {
   //   }
 
   // render() {
-    // return (
-    //   <div className="App">
-    //     <h1>{ this.state.message }</h1>
-    //     <button onClick={this.fetchData} >
-    //       Fetch Data
-    //     </button>        
-    //   </div>
-    // );
+  // return (
+  //   <div className="App">
+  //     <h1>{ this.state.message }</h1>
+  //     <button onClick={this.fetchData} >
+  //       Fetch Data
+  //     </button>        
+  //   </div>
+  // );
+  // const INITIALIZE = 'INITIALIZE';
+  const LOGIN = 'LOGIN';
+  const SIGNUP = 'SIGNUP';
 
+  const { mode, transition } = useVisualMode(
+    LOGIN
+    // INITIALIZE
+  );
+
+  const [user, setUser] = useState<boolean>(false);
+
+
+
+  console.log(localStorage.userID)
   return (
     <Router>
-    
-      <NavDiv>
-        <NavList>
-          <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
-          <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
-          <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
-        </NavList>
-      </NavDiv>
+
+      {user &&
+        <NavDiv>
+          <NavList>
+            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
+            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
+            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
+          </NavList>
+        </NavDiv>}
 
       <Switch>
-        <Route path='/login'>
-          <LoginInForm />
-        </Route>
-        <Route path='/explore'>
-          <Explore 
-          city='Van'
-          topRecommended="Vancouver"
-          selected=''
-          // handleChange={e => e.target.value}
-        />
-        </Route>
-        <Route exact path='/trips'>
-          <TripsIndex />
-        </Route>
+        {!user ? <>
+        <Route path='/'>
+          <Wrapper>
+            <Button onClick={() => transition(LOGIN)}>Login In</Button>
+            <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
+          </Wrapper>
+          {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
+          {mode === SIGNUP && <SignUpForm />}
+
+          </Route>
+        </>
+          :
+          <>
+          <Route path='/explore'>
+            <Explore
+              cityName='Van'
+              topRecommended="Vancouver"
+            // selected=''
+            />
+          </Route>
+          <Route path='/trips'>
+            <TripsIndex />
+          </Route>
+
+          <Route path='/profile'>
+            <Profile setLogout={() => setUser(false)} />
+          </Route>
+          </>}
       </Switch>
     </Router>
   )
