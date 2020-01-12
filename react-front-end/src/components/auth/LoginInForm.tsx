@@ -16,7 +16,9 @@ interface User {
   facebook?: string;
 }
 
-export const LoginInForm = (data: Credentials) => {
+type LogInTypes = { setLogin: any };
+
+export const LoginInForm = ({setLogin}:LogInTypes) => {
   // user input state
   const [{ email, password }, setCredentials] = useState({
     email: '',
@@ -39,7 +41,9 @@ export const LoginInForm = (data: Credentials) => {
           localStorage.setItem('userID', res.data.user.id);
           setUser(res.data.user)
         }
-      }).catch(err => console.log(err))
+      })
+      .then(() => setLogin())
+      .catch(err => console.log(err))
   };
 
   return (
