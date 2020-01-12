@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 interface FilterProps {
   attractions: Array<any>;
-  handleFilter?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleFilter?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  checked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  // checked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const Button = styled.button`
   text-align: right;
@@ -29,9 +30,10 @@ const Input = styled.input`
   // display: flex;
   font-size: 10px;
 `;
-export const Filter: FC<FilterProps> = ({ attractions, handleFilter, checked }) => {
+export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
   
   const [filters, setFilters] = useState<Array<any>>([]);
+  const [filterSelected,setFilterSelected] = useState<Array<any>>([]);
 
   useEffect(() => {
     let filters = [
@@ -51,56 +53,39 @@ export const Filter: FC<FilterProps> = ({ attractions, handleFilter, checked }) 
         };
       })
     )
-  }, [])
+  }, []);
 
-  // const [isChecked, setIsChecked] = useState<Boolean>(false);
+  handleSubmit = () => {
 
-  // handleFilter = (e) => {
-  //   // e.preventDefault()
-  //   let checked = e.target.checked;
+  };
 
-  //   setFilters(
-  //     filters.map(filter => {
-        
-  //       filter.select = checked;
-  //       return filter;
-  //     })
-  //   )
-  //   // console.log(e)
-  //   // console.log(filters);
-  // }
-  
   return (
     <Fragment>
       <Button>Filter</Button>
       <FilterTab>
-        {filters.map((filter) => (
+        {filters.map((filter1) => (
           <div>
           <Input
-            key={filter.id}
+            key={filter1.id}
             type="checkbox"
-            name={`${filter}`}
+            name={`${filter1}`}
             onChange={(e) => {
-              // e.preventDefault()
               let checked = e.target.checked;
-          
               setFilters(
                 filters.map(filter2 => {
-                  if (filter2.id === filter.id) {
-
+                  if (filter2.id === filter1.id) {
                     filter2.select = checked;
                   }
-                  console.log(filter2)
                   return filter2;
                 })
               )}
             }
-            checked={filter.select}
-          />{filter.category}
+            checked={filter1.select}
+          />{filter1.category}
           </div>
         ))}
-       
       </FilterTab>
+      <Button onClick={handleSubmit}>Set Filter</Button>
     </Fragment>
   );
 };
