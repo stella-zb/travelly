@@ -103,32 +103,32 @@ export default function App() {
 
       <Switch>
         {!user ? <>
-        <Route path='/'>
-          <Wrapper>
-            <Button onClick={() => transition(LOGIN)}>Login In</Button>
-            <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
-          </Wrapper>
-          {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
-          {mode === SIGNUP && <SignUpForm />}
+          <Route path='/'>
+            <Wrapper>
+              <Button onClick={() => transition(LOGIN)}>Login In</Button>
+              <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
+            </Wrapper>
+            {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
+            {mode === SIGNUP && <SignUpForm setLogin={() => setUser(true)} />}
 
           </Route>
         </>
           :
           <>
-          <Route path='/explore'>
-            <Explore
-              cityName='Van'
-              topRecommended="Vancouver"
-            // selected=''
-            />
-          </Route>
-          <Route path='/trips'>
-            <TripsIndex />
-          </Route>
+            <Route path='/explore'>
+              <Explore
+                cityName='Van'
+                topRecommended="Vancouver"
+              // selected=''
+              />
+            </Route>
+            <Route path='/trips'>
+              <TripsIndex />
+            </Route>
 
-          <Route path='/profile'>
-            <Profile setLogout={() => setUser(false)} />
-          </Route>
+            <Route path='/profile'>
+              <Profile setLogout={() => setUser(false)} />
+            </Route>
           </>}
       </Switch>
     </Router>
