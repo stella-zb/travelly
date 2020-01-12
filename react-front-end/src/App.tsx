@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
@@ -84,41 +84,52 @@ export default function App() {
     // INITIALIZE
   );
 
+  const [user, setUser] = useState<boolean>(false);
+
+
+
+  console.log(localStorage.userID)
   return (
     <Router>
 
-      <NavDiv>
-        <NavList>
-          <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
-          <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
-          <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
-        </NavList>
-      </NavDiv>
+      {user &&
+        <NavDiv>
+          <NavList>
+            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
+            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
+            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
+          </NavList>
+        </NavDiv>}
 
       <Switch>
-        <Route exact path='/'>
+        {!user ? <>
+        <Route path='/'>
           <Wrapper>
             <Button onClick={() => transition(LOGIN)}>Login In</Button>
             <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
           </Wrapper>
-          {mode === LOGIN && <LoginInForm />}
+          {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
           {mode === SIGNUP && <SignUpForm />}
 
-        </Route>
-        <Route path='/explore'>
-          <Explore
-            cityName='Van'
-            topRecommended="Vancouver"
+          </Route>
+        </>
+          :
+          <>
+          <Route path='/explore'>
+            <Explore
+              cityName='Van'
+              topRecommended="Vancouver"
             // selected=''
-          />
-        </Route>
-        <Route path='/trips'>
-          <TripsIndex />
-        </Route>
+            />
+          </Route>
+          <Route path='/trips'>
+            <TripsIndex />
+          </Route>
 
-        <Route path='/profile'>
-          <Profile />
-        </Route>
+          <Route path='/profile'>
+            <Profile setLogout={() => setUser(false)} />
+          </Route>
+          </>}
       </Switch>
     </Router>
   )
