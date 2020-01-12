@@ -24,7 +24,6 @@ export const animation1 = keyframes`
   }
 `;
 
-
 export const Container = styled.div`
   display: grid;
   grid-template-rows: 15% 85%;
