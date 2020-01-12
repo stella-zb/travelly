@@ -21,7 +21,7 @@ type ExploreProps = {
 export const Explore: React.FC<ExploreProps> = () => {
   
     return (
-      <Router>
+      // <Router>
         <Switch>
           <Route exact path='/explore'>
             <SearchBar />
@@ -31,6 +31,6 @@ export const Explore: React.FC<ExploreProps> = () => {
             <Swipe itinerariesId ={match.params.itinerariesId}/>)}/>
         </Switch>
 
-      </Router>
+      // </Router>
     )
 }
