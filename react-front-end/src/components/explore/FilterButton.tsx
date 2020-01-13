@@ -5,6 +5,19 @@ interface FilterProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+`;
+
 const Button = styled.button`
   text-align: right;
   margin: 20px 10px;
@@ -19,14 +32,6 @@ const Button = styled.button`
   font-size: 10px;
   cursor: cursor;
 `;
-const FilterTab = styled.div`
-  display: flex;
-  height: 200px;
-`;
-const Input = styled.input`
-  // display: flex;
-  font-size: 10px;
-`;
 export const FilterButton: FC<FilterProps> = ({ handleToggle }) => {
   
   handleToggle = () => {
@@ -34,8 +39,8 @@ export const FilterButton: FC<FilterProps> = ({ handleToggle }) => {
   };
 
   return (
-    <Fragment>
+    <Container>
       <Button onClick={handleToggle}>Filter</Button>
-    </Fragment>
+    </Container>
   );
 };
