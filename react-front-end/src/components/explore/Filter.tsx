@@ -6,6 +6,7 @@ interface FilterProps {
   // handleFilter?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  setFilters: any
   // checked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const Button = styled.button`
@@ -30,13 +31,12 @@ const Input = styled.input`
   // display: flex;
   font-size: 10px;
 `;
-export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
+export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit }) => {
   
-  const [filters, setFilters] = useState<Array<any>>([]);
-  const [filterSelected,setFilterSelected] = useState<Array<any>>([]);
+  const [categoryFilters, setCategoryfilters] = useState<Array<any>>([]);
 
   useEffect(() => {
-    let filters = [
+    let categoryFilters = [
       { id: 1, category: "SCENERY" },
       { id: 2, category: "SHOPPING" },
       { id: 3, category: "RESTAURANTS/COFFEE SHOPS" },
@@ -44,8 +44,8 @@ export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
       { id:5, category: "MUSEUM" }
     ];
 
-    setFilters(
-      filters.map(filter => {
+    setCategoryfilters(
+      categoryFilters.map(filter => {
         return {
           select: false,
           id: filter.id,
@@ -55,24 +55,21 @@ export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
     )
   }, []);
 
-  // console.log(filters);
+  // console.log(categoryFilters);
 
   handleSubmit = (e) => {  
-    console.log('sn1>>>',filters);
-    let selectedFilter: Array<any>;
-    selectedFilter = [];
-    filters.map(filter => {
+    // e.preventDefault();
+    let selectedFilters: Array<any>;
+    selectedFilters = [];
+    categoryFilters.map(filter => {
       if (filter.select === true) {
-        selectedFilter.push(filter.category);
+        selectedFilters.push(filter.category);
       };
-      return selectedFilter;
+      return selectedFilters;
     });
     
-    console.log('sn2>>>', selectedFilter);
-    console.log('sn3>>>',attractions)
-    const filterAttractions = attractions.filter(attraction => selectedFilter.includes(attraction.category))
-      
-    console.log('sn4>>>',filterAttractions);
+    setFilters(selectedFilters);
+    
   };
 
   return (
@@ -80,7 +77,7 @@ export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
       <Button>Filter</Button>
       <form>
       <FilterTab>
-        {filters.map((filter1) => (
+        {categoryFilters.map((filter1) => (
           <div>
             <Input
               key={filter1.id}
@@ -88,8 +85,8 @@ export const Filter: FC<FilterProps> = ({ attractions, handleSubmit }) => {
               name={`${filter1}`}
               onChange={(e) => {
                 let checked = e.target.checked;
-                setFilters(
-                  filters.map(filter2 => {
+                setCategoryfilters(
+                  categoryFilters.map(filter2 => {
                     if (filter2.id === filter1.id) {
                       filter2.select = checked;
                     }

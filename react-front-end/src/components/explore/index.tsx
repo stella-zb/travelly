@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { SearchBar } from "./SearchBox";
 import { DestRec } from "./DestRecommended";
-import { Swipe } from "./swipe";
+import { AttractionList } from "./Attractions";
 
 
 type ExploreProps = {
@@ -28,7 +28,7 @@ export const Explore: React.FC<ExploreProps> = () => {
             <DestRec cityName="Van" topRecommended="Vancouver"/>
           </Route>
           <Route exact path={`/explore/:itinerariesId`} render={({match}) => (
-            <Swipe itinerariesId ={match.params.itinerariesId}/>)}/>
+            <AttractionList itinerariesId ={match.params.itinerariesId}/>)}/>
         </Switch>
 
       // </Router>
