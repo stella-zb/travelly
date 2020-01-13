@@ -14,7 +14,7 @@ INSERT INTO itineraries (
 ), (
   'Seattle', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg', 1585958400, 1586476800
 ), (
-  'New York City', 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1591747200, 1592179140
+  'New York City', 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1591747200, 1592092799
 );
 
 INSERT INTO attractions (
@@ -42,7 +42,12 @@ INSERT INTO attractions (
 ('Statue of Liberty', 5, 40.689247, -74.044502, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1),
 ('Coney Island', 5, 40.57788, -73.99403, 'https://lp-cms-production.imgix.net/features/2019/08/amusement-coney-island-shutterstockRF_332266760-08ffe08a73d3.jpg', 1),
 ('Grand Central Terminal', 5, 40.752655, -73.977295, 'https://untappedcities-wpengine.netdna-ssl.com/wp-content/uploads/2013/03/Grand-Central-Terminal-Aerial-View-from-Glass-Walkways-NYC.jpg', 1),
-('American Museum of Natural History', 5, 40.7809345, -73.9737497, 'https://d21xlh2maitm24.cloudfront.net/nyc/natural-history-museum.jpg', 1)
+('American Museum of Natural History', 5, 40.7809345, -73.9737497, 'https://d21xlh2maitm24.cloudfront.net/nyc/natural-history-museum.jpg', 1),
+('Times Square', 5, 40.758896, -73.985130, 'https://ssl.tzoo-img.com/images/tzoo.hd.29653.4909.357159.TimesSquareHolidayInnExpress.jpg', 2),
+('Rockefeller Center', 5, 40.759487, -73.978356, 'https://media.timeout.com/images/104233902/1372/772/image.jpg', 2),
+('Guggenheim Museum', 5, 40.782980, -73.958971, 'https://d21xlh2maitm24.cloudfront.net/nyc/Guggenheim.jpg', 2),
+('St. Patrick’s Cathedral', 5, 40.758160, -73.975418, 'http://www.hpbmagazine.org/images/cache/cache_2/cache_0/cache_6/HPB_Fall2019_murphy_stpatricks_streetview2-af4c0602.jpeg', 2),
+('Chelsea Market', 5, 40.742352, -74.006210, 'https://img.theculturetrip.com/1024x574/smart/wp-content/uploads/2019/01/bycttb.jpg', 2)
 ;
 
 INSERT INTO timeslots (
@@ -91,6 +96,16 @@ INSERT INTO timeslots (
   NULL, NULL, 3, 16, NULL
 ), (
   NULL, NULL, 3, 17, NULL
+),  (
+  NULL, NULL, 3, 18, NULL
+),  (
+  NULL, NULL, 3, 19, NULL
+),  (
+  NULL, NULL, 3, 20, NULL
+),  (
+  NULL, NULL, 3, 21, NULL
+),  (
+  NULL, NULL, 3, 22, NULL
 );
 
 INSERT INTO user_itinerary (
