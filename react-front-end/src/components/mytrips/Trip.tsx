@@ -24,8 +24,7 @@ export const Trip = () => {
       return <Redirect to='/trips' />;
     }
     for (let i = 0; i < attr.length; i++) {
-      if (attr[i].start_time === null || attr[i].end_time === null) {
-        editAction();
+      if (attr[i].start_time === null || attr[i].end_time === null) {        
         return <AttractionList
           id={id}
           attractions={timeslots}
