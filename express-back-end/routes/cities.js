@@ -25,6 +25,7 @@ module.exports = (db) => {
     const userId = req.query.user;
     console.log(req.query.user)
     const { city, cityImg, tripStart, tripEnd } = req.body;
+    city.toUpperCase();
     db.query(
       `SELECT * FROM itineraries
       WHERE city = $1 AND trip_start = $2 AND trip_end = $3;
@@ -79,7 +80,8 @@ module.exports = (db) => {
       tripStart = query.rows[0].trip_start;
       tripEnd = query.rows[0].trip_end;
 
-      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${GOOGLE_KEY}`)
+    city.toUpperCase();
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${GOOGLE_KEY}`)
       .then(results => {
         const {lat, lng} = results.data.results[0].geometry.location;
         return Promise.all([
