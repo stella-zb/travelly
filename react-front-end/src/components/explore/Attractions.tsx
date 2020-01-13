@@ -112,7 +112,7 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
   // getAttractions(attractionObject, attractions);
   // applyFilter(getAttractions(attractionObject, attractions), filters);
   // setAttractions(applyFilter(getAttractions(attractionObject, attractions), filters));
-  console.log(attractions)
+  // console.log(attractions)
     
   return (
     <Container>
