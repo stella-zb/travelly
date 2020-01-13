@@ -41,7 +41,10 @@ const Button = styled.button`
   padding: 10px 40px
   border: none;
   background-color: white;
-  border-bottom: 2px solid #00C3AB;
+
+  &:hover {
+    border-bottom: 2px solid #00C3AB;
+  }
 `;
 
 export default function App() {
