@@ -14,7 +14,8 @@ module.exports = (db) => {
       JOIN user_itinerary on itineraries.id = user_itinerary.itinerary_id
       FULL OUTER JOIN timeslots on timeslots.itinerary_id = itineraries.id
       FULL OUTER JOIN attractions on attraction_id = attractions.id
-      WHERE user_itinerary.user_id = $1 AND attraction_id IS NOT NULL;
+      WHERE user_itinerary.user_id = $1 AND attraction_id IS NOT NULL
+      ORDER BY trip_start;
       `, [req.query.user]
     )
       .then((response) => {
