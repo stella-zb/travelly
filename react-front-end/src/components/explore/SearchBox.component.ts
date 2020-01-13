@@ -29,4 +29,4 @@ export const Button = styled.button`
 
 export const Header = styled.h2`
   top: 30px;
-`
+`;
