@@ -27,7 +27,7 @@ export const Explore: React.FC<ExploreProps> = () => {
             <SearchBar />
             <DestRec cityName="Van" topRecommended="Vancouver"/>
           </Route>
-          <Route exact path={`/explore/:itinerariesId`} render={({match}) => (
+          <Route path={`/explore/:itinerariesId`} render={({match}) => (
             <AttractionList itinerariesId ={match.params.itinerariesId}/>)}/>
         </Switch>
 

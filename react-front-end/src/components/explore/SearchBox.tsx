@@ -54,26 +54,35 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     axios.defaults.baseURL = 'http://localhost:8081';
     const city = search.query;
     const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
-    const tripStart = Math.round(startDate.getTime() / 100000000) * 100000;
-    const tripEnd = Math.round(endDate.getTime() / 100000000) * 1000000;
-    Promise.all([
-      axios(`/api/itineraries`, {
-        method: "post",
-        data: {
-          city,
-          cityImg,
-          tripStart, 
-          tripEnd
-        },
-        withCredentials: true,
-        params: {
-          user: localStorage.userID
-        }
-      }),
-    ])
-    .then((res) => {
-      setItinerariesId(res[0].data);
-    })
+    const start = startDate.getTime();
+    const end = endDate.getTime();
+    const dateVerified = Date.now();
+    if (start <= dateVerified || end <= dateVerified || !city) {
+      alert(` Either these conditions is not met:
+      - Date needs to be a future date
+      - City cannot be blank`);
+    } else {
+      const tripStart = Math.round(startDate.getTime() / 100000000) * 100000;
+      const tripEnd = Math.round(endDate.getTime() / 100000000) * 100000;
+      Promise.all([
+        axios(`/api/itineraries`, {
+          method: "post",
+          data: {
+            city,
+            cityImg,
+            tripStart, 
+            tripEnd
+          },
+          withCredentials: true,
+          params: {
+            user: localStorage.userID
+          }
+        }),
+      ])
+      .then((res) => {
+        setItinerariesId(res[0].data);
+      })
+    }
 
   };
 
