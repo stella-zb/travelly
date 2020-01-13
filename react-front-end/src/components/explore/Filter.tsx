@@ -1,11 +1,14 @@
 import React, { FC, Fragment, useState, useEffect } from 'react';
 import styled from "styled-components";
 
+import { FilterButton } from "./FilterButton";
+
 interface FilterProps {
   attractions: Array<any>;
   // handleFilter?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   setFilters: any
   // checked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -31,7 +34,7 @@ const Input = styled.input`
   // display: flex;
   font-size: 10px;
 `;
-export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit }) => {
+export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle }) => {
   
   const [categoryFilters, setCategoryfilters] = useState<Array<any>>([]);
 
@@ -72,9 +75,13 @@ export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit }) => {
     
   };
 
+  handleToggle = () => {
+
+  };
+
   return (
     <Fragment>
-      <Button>Filter</Button>
+      <FilterButton onClick={handleToggle}>Filter</FilterButton>
       <form>
       <FilterTab>
         {categoryFilters.map((filter1) => (
