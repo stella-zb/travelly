@@ -61,7 +61,7 @@ export const Swipe: FC<SwipeProps> = ({attractions, handleSubmit, itinerariesId}
     .then(() => {
       // history.push(`/explore/:${search.query}`);
     })
-    .catch((err) => console.log(err))
+    // .catch((err) =\  > console.log(err))
   };
 
   return (
