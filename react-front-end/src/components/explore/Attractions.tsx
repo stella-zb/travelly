@@ -1,4 +1,5 @@
 import React, { useState, FC, Fragment, useEffect } from 'react';
+import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
 
 import { Filter } from "./Filter";
@@ -9,7 +10,8 @@ import {
   Container,
   TopBar,
   Attractions,
-  City
+  City,
+  NavButton
 } from "./swipe.component";
 
 import "react-animated-slider/build/horizontal.css";
@@ -17,8 +19,9 @@ import "react-animated-slider/build/horizontal.css";
 
 interface SwipeProps {
   // style?: React.CSSProperties | undefined
-  itinerariesId: number
-  
+  itinerariesId: number;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  handleNavigate?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 };
 
 interface AttractionsObject {
@@ -36,7 +39,7 @@ interface AttractionsObject {
   category: string
 };
 
-export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
+export const AttractionList: FC<SwipeProps> = ({ itinerariesId, handleNavigate }) => {
 
   const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
   const [city, setCity] = useState<string>('');
@@ -63,7 +66,10 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
     })
     .catch((err) => console.log(err));
   },[filters]);
-    
+  
+  // handleNavigate = () => {
+  //   return <Redirect to={`/trips/:${itinerariesId}`}/>;
+  // }
   return (
     <Container>
       <TopBar>
@@ -72,7 +78,8 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
       </TopBar>
       <Attractions>
         <Swipe attractions={attractions} itinerariesId={itinerariesId}/>
-    </Attractions>
+      </Attractions>
+      <Link to={`/trips/${itinerariesId}`}> <NavButton>Go</NavButton></Link>
     </Container>
   );
 };

@@ -24,8 +24,8 @@ module.exports = (db) => {
     let itinerariesId;
     const userId = req.query.user;
     console.log(req.query.user)
-    const { city, cityImg, tripStart, tripEnd } = req.body;
-    city.toUpperCase();
+    let { city, cityImg, tripStart, tripEnd } = req.body;
+    city = city.toUpperCase();
     db.query(
       `SELECT * FROM itineraries
       WHERE city = $1 AND trip_start = $2 AND trip_end = $3;
