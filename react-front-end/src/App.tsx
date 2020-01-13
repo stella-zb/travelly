@@ -84,11 +84,10 @@ export default function App() {
     // INITIALIZE
   );
 
-  const [user, setUser] = useState<boolean>(false);
+  const [user, setUser] = useState<number>(localStorage.userID);
 
 
 
-  console.log(localStorage.userID)
   return (
     <Router>
 
@@ -108,8 +107,8 @@ export default function App() {
               <Button onClick={() => transition(LOGIN)}>Login In</Button>
               <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
             </Wrapper>
-            {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
-            {mode === SIGNUP && <SignUpForm setLogin={() => setUser(true)} />}
+            {mode === LOGIN && <LoginInForm setLogin={() => setUser(localStorage.userID)} />}
+            {mode === SIGNUP && <SignUpForm setLogin={() => setUser(localStorage.userID)} />}
 
           </Route>
         </>
@@ -127,7 +126,7 @@ export default function App() {
             </Route>
 
             <Route path='/profile'>
-              <Profile setLogout={() => setUser(false)} />
+              <Profile setLogout={() => setUser(null)} />
             </Route>
           </>}
       </Switch>
