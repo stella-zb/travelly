@@ -14,7 +14,7 @@ INSERT INTO itineraries (
 ), (
   'Seattle', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg', 1585958400, 1586476800
 ), (
-  'New York City', 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1591747200, 1592179200
+  'New York City', 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1591747200, 1592179140
 );
 
 INSERT INTO attractions (
