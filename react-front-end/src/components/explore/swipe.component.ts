@@ -172,3 +172,6 @@ export const City = styled.h2`
   text-align: left;
   display: center;
 `;
+
+export const NavButton = styled.button`
+`;
