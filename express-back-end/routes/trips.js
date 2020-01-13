@@ -25,18 +25,41 @@ module.exports = (db) => {
   router.get('/:id', (req, res) => {
     db.query(
       `
-      SELECT timeslots.*, attractions.*, itineraries.*, first_name, timeslots.id AS id FROM timeslots
-      FULL OUTER JOIN attractions ON attraction_id = attractions.id
-      FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
-      FULL OUTER JOIN users ON submitted_by = users.id
-      WHERE itinerary_id = $1 
-      ORDER BY start_time
-      ;
+      SELECT * FROM timeslots
+      WHERE itinerary_id = $1;
       `, [req.params.id]
     )
       .then((response) => {
-        res.json(response.rows);
+        const data = response.rows;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].start_time === null || data[i].end_time === null) {
+            return db.query(
+              `
+              UPDATE timeslots
+              SET start_time = null, end_time = null
+              FROM itineraries
+              WHERE itinerary_id = itineraries.id AND itinerary_id = $1;
+              `, [req.params.id]
+            )
+            .then(() => {
+              return db.query(`
+            DELETE from timeslots
+            WHERE itinerary_id = $1 AND travel_mode IS NOT NULL;
+            `, [req.params.id])
+            })
+          }
+        }
       })
+      .then(() => {
+        return db.query(`
+        SELECT timeslots.*, attractions.*, itineraries.*, first_name, timeslots.id AS id FROM timeslots
+        FULL OUTER JOIN attractions ON attraction_id = attractions.id
+        FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
+        FULL OUTER JOIN users ON submitted_by = users.id
+        WHERE itinerary_id = $1 
+        ORDER BY start_time;`, [req.params.id])
+      })
+    .then((response) => res.json(response.rows))
   })
 
   router.post('/:id', async (req, res) => {
