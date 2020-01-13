@@ -65,8 +65,10 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     let tripStart = Date.parse(convertStart);
     let tripEnd = Date.parse(convertEnd);
 
+    //valid date and city check
+
     const dateVerified = Date.now();
-    if (tripStart <= dateVerified || tripEnd <= dateVerified || !city) {
+    if (tripStart <= dateVerified || tripEnd <= dateVerified || tripStart > tripEnd || !city) {
       alert(` Either these conditions is not met:
       - Date needs to be a future date
       - City cannot be blank`);
