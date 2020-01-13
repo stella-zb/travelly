@@ -95,16 +95,16 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
     .then(res => {
       setCity(res.data[1]);
       const shuffledAttractions = shuffleAttractions(res.data[0]);
-      console.log(shuffledAttractions);
+      // console.log(shuffledAttractions);
       setAttractions(shuffleAttractions)
 
       const attractionsObject = getAttractions(attractionObject, shuffledAttractions);
-      console.log(attractionsObject);
-      console.log(filters)
+      // console.log(attractionsObject);
+      // console.log(filters)
       const result = applyFilter(attractionsObject, filters)
       setAttractions(result);
       getAttractions(attractionObject, attractions);
-      console.log('attractions object', result);
+      // console.log('attractions object', result);
     })
     .catch((err) => console.log(err));
   },[filters]);
