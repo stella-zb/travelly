@@ -57,8 +57,10 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     const start = startDate.getTime();
     const end = endDate.getTime();
     const dateVerified = Date.now();
-    if (start <= dateVerified || end <= dateVerified) {
-      alert('Date needs to be a future date');
+    if (start <= dateVerified || end <= dateVerified || !city) {
+      alert(` Either these conditions is not met:
+      - Date needs to be a future date
+      - City cannot be blank`);
     } else {
       const tripStart = Math.round(startDate.getTime() / 100000000) * 100000;
       const tripEnd = Math.round(endDate.getTime() / 100000000) * 100000;
