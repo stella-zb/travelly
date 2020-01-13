@@ -3,7 +3,7 @@ import { Redirect, useHistory} from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import moment from "moment";
 import { Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component"
 
 
@@ -28,7 +28,6 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
   //user date input
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const history = useHistory()
   const [itinerariesId, setItinerariesId] = useState<number | null>();
   
   handleInputChange = (e) => {
@@ -54,16 +53,26 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     axios.defaults.baseURL = 'http://localhost:8081';
     const city = search.query;
     const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
-    const start = startDate.getTime();
-    const end = endDate.getTime();
+    
+    //convert to UTC timezone - UNIX
+
+    let convertStart = startDate.toString().slice(4, 15);
+    let convertEnd = endDate.toString().slice(4, 15);
+    const timezoneStart = "00:00:00 GMT";
+    const timezoneEnd = "11:59:59 GMT"
+    convertStart = convertStart.concat(' ', timezoneStart);
+    convertEnd = convertEnd.concat(' ', timezoneEnd);
+    let tripStart = Date.parse(convertStart);
+    let tripEnd = Date.parse(convertEnd);
+
     const dateVerified = Date.now();
-    if (start <= dateVerified || end <= dateVerified || !city) {
+    if (tripStart <= dateVerified || tripEnd <= dateVerified || !city) {
       alert(` Either these conditions is not met:
       - Date needs to be a future date
       - City cannot be blank`);
     } else {
-      const tripStart = Math.round(startDate.getTime() / 100000000) * 100000;
-      const tripEnd = Math.round(endDate.getTime() / 100000000) * 100000;
+      tripStart = tripStart / 1000;
+      tripEnd = tripEnd / 1000;
       Promise.all([
         axios(`/api/itineraries`, {
           method: "post",
