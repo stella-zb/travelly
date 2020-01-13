@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
@@ -117,6 +117,7 @@ export default function App() {
         </>
           :
           <>
+            <Redirect from="/" to="/explore" />
             <Route path='/explore'>
               <Explore
                 cityName='Van'
