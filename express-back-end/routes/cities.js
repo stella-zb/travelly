@@ -224,36 +224,48 @@ module.exports = (db) => {
     } = req.body.attraction;
     const itinerariesId = req.params.itinerariesId;
     db.query(
-      `INSERT INTO attractions (
-        name,
-        description,
-        review,
-        latitude,
-        longitude,
-        open_time,
-        close_time,
-        visit_duration,
-        photo,
-        location,
-        submitted_by
-      ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
-      )
-      RETURNING id;
-      `,[name, description, review ? review : null, lat, long, open_time, close_time, visit_duration, photo, location, req.query.user])
-    .then(query => {
-      const activityId = query.rows[0].id;
-      db.query(
-        `INSERT INTO timeslots (
-          start_time,
-          end_time,
-          itinerary_id,
-          attraction_id
-        ) VALUES (
-          $1, $2, $3, $4
-        )`, [ null, null, itinerariesId , activityId]
-      )
-    })
+    `SELECT * FROM attractions
+      JOIN timeslots on attractions.id = timeslots.attraction_id
+      WHERE name = $1;
+      `, [name])
+      .then(query => {
+        console.log(query.rows[0])
+        const itinerary = query.rows[0];
+        // console.log(itinerary)
+        if (!itinerary) {
+          db.query(
+            `INSERT INTO attractions (
+              name,
+              description,
+              review,
+              latitude,
+              longitude,
+              open_time,
+              close_time,
+              visit_duration,
+              photo,
+              location,
+              submitted_by
+            ) VALUES (
+              $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
+            )
+            RETURNING id;
+            `,[name, description, review ? review : null, lat, long, open_time, close_time, visit_duration, photo, location, req.query.user])
+          .then(query => {
+            const activityId = query.rows[0].id;
+            db.query(
+              `INSERT INTO timeslots (
+                start_time,
+                end_time,
+                itinerary_id,
+                attraction_id
+              ) VALUES (
+                $1, $2, $3, $4
+              )`, [ null, null, itinerariesId , activityId])
+              
+          })
+        }  
+        })
   });
 
   return router;
