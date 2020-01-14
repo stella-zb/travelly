@@ -20,6 +20,7 @@ const Header = styled.div`
   padding: 10px;
   margin: 0px;
   border-bottom: 1px solid #A4ADA6;
+  background: #E5F9FF;
 `
 
 const ActionIcon = styled.img`
