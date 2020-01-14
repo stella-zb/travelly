@@ -40,10 +40,10 @@ const Button = styled.button`
   margin: 20px;
   padding: 10px 40px
   border: none;
-  background-color: white;
+  background-color: #FCFCFC;
 
   &:hover {
-    border-bottom: 2px solid #00C3AB;
+    border-bottom: 2px solid #76BED0;
   }
 `;
 
@@ -108,7 +108,7 @@ export default function App() {
         {!user ? <>
           <Route path='/'>
             <Wrapper>
-              <Button onClick={() => transition(LOGIN)}>Login In</Button>
+              <Button onClick={() => transition(LOGIN)}>Log In</Button>
               <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
             </Wrapper>
             {mode === LOGIN && <LoginInForm setLogin={() => setUser(localStorage.userID)} />}

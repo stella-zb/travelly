@@ -21,7 +21,7 @@ export const City = ({name, img, start, end}: CityProps) => {
     margin: 25px;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${img});
     background-size: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
   `;
 
   return (
