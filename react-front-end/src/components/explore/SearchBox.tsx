@@ -52,7 +52,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
   handleSubmit = () => {
     axios.defaults.baseURL = 'http://localhost:8081';
     const city = search.query;
-    const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
+
     
     //convert to UTC timezone - UNIX
 
@@ -66,8 +66,9 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     let tripEnd = Date.parse(convertEnd);
 
     //valid date and city check
-
-    const dateVerified = Date.now();
+    console.log(tripStart);
+    const dateVerified = Date.now() - 28800000;
+    console.log(dateVerified)
     if (tripStart <= dateVerified || tripEnd <= dateVerified || tripStart > tripEnd || !city) {
       alert(` Either these conditions is not met:
       - Date needs to be a future date
@@ -80,7 +81,6 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
           method: "post",
           data: {
             city,
-            cityImg,
             tripStart, 
             tripEnd
           },
