@@ -22,13 +22,20 @@ const Title = styled.h1`
 `;
 
 const AddAttr = styled.img`
-  width: 40px;
+  width: 35px;
 `;
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
 
 const Header = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding-right: 10%;
   padding-left: 10%;
 `;
@@ -62,10 +69,10 @@ export const AttractionList = ({ id, attractions, deleteAttraction, setInvite, g
       {edit && <Redirect to={`/explore/${id}`} />}
       <Header>
         <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
-        <div>
+        <Actions>
           <AddAttr src={addattr} onClick={updateItinerary} />
           <InviteIcon id={id} setInvite={setInvite} />
-        </div>
+        </Actions>
       </Header>
 
       <Attractions>
