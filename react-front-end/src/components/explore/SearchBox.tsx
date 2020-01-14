@@ -136,7 +136,10 @@ export const SearchBar: FC<SearchProps> = ({
       <DatePick>
         <div>
           <h4>End Date</h4>
-          <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
+          <DatePicker
+            selected={endDate}
+            onChange={date => setEndDate(date)}
+          />
         </div>
       </DatePick>
       <Button type="button" onClick={handleSubmit}>
