@@ -4,13 +4,9 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import {
-  Input,
-  Suggestion,
-  DatePick,
-  Button,
-  Header
-} from "./SearchBox.component";
+import { Wrapper, Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component";
+import './SearchBox.css';
+
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,10 +21,10 @@ interface SearchObj {
   results: Array<any>;
 }
 
-export const SearchBar: FC<SearchProps> = ({
-  handleInputChange,
-  handleSubmit
-}) => {
+export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
+
+  const [focus, setFocus] = useState<boolean>(false)
+
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: "", results: [] });
 
@@ -37,25 +33,24 @@ export const SearchBar: FC<SearchProps> = ({
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [itinerariesId, setItinerariesId] = useState<number | null>();
 
-  handleInputChange = e => {
-    const city = e.target.value;
-    axios
-      .get(`/api/itineraries/`, {
-        params: {
-          city: e.target.value
-        }
-      })
+  handleInputChange = (e) => {
+    const city = e.target.value
+    axios.get(`/api/itineraries/`, {
+      params: {
+        city: e.target.value
+      }
+    })
       .then(res => {
         let result: Array<any>;
         let suggestion: Array<any>;
-        result = res.data.predictions;
+        result = res.data.predictions
         suggestion = [];
         result.map(each => {
           // suggestion.push(each.description.split(',')[0])
-          suggestion.push(each.description);
-        });
-        setSearch({ query: city, results: suggestion });
-      });
+          suggestion.push(each.description)
+        })
+        setSearch({ query: city, results: suggestion })
+      })
   };
 
   handleSubmit = () => {
@@ -100,51 +95,57 @@ export const SearchBar: FC<SearchProps> = ({
           params: {
             user: localStorage.userID
           }
+        }),
+      ])
+        .then((res) => {
+          setItinerariesId(res[0].data);
         })
-      ]).then(res => {
-        setItinerariesId(res[0].data);
-      });
     }
   };
 
-  return itinerariesId ? (
-    <Redirect to={`/explore/${itinerariesId}`} />
-  ) : (
-    <Fragment>
-      <Header>Where do you travel to next?</Header>
-      <div className="SearchBar">
-        <form>
-          <Input
-            type="text"
-            id="search-input"
-            placeholder="Please enter your destination"
-            onChange={handleInputChange}
-            value={search.query}
-          />
-          <Suggestion>{search.results}</Suggestion>
-        </form>
-      </div>
-      <DatePick>
-        <div>
-          <h4>Start Date</h4>
-          <DatePicker
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-          />
-        </div>
-      </DatePick>
-      <DatePick>
-        <div>
-          <h4>End Date</h4>
-          <DatePicker
-            selected={endDate}
-            onChange={date => setEndDate(date)}
-          />
-        </div>
-      </DatePick>
-      <Button type="button" onClick={handleSubmit}>
-        Search
-      </Button>
-    </Fragment>
+  return (
+    itinerariesId ? <Redirect to={`/explore/${itinerariesId}`} />
+      :
+      <Wrapper>
+        <Fragment>
+          <Header>Where do you travel to next?</Header>
+          <div className="SearchBar">
+            <form>
+              <Input
+                type="text"
+                id="search-input"
+                placeholder="Please enter your destination"
+                onChange={handleInputChange}
+                value={search.query}
+                onFocus={() => setFocus(true)}
+                onBlur={() => setFocus(false)}
+              />
+
+              {focus && search.results.map(result => (
+                <Suggestion onClick={() => setSearch(result)}>{result}</Suggestion>
+              ))}
+            </form>
+          </div>
+          <DatePick>
+            <div>
+              <h4>Start Date</h4>
+              <DatePicker
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+              />
+            </div>
+          </DatePick>
+          <DatePick>
+            <div>
+              <h4>End Date</h4>
+              <DatePicker
+                selected={endDate}
+                onChange={date => setEndDate(date)}
+              />
+            </div>
+          </DatePick>
+          <Button type="button" onClick={handleSubmit}>Search</Button>
+        </Fragment>
+      </Wrapper>
   );
 };
