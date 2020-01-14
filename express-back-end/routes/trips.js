@@ -53,7 +53,7 @@ module.exports = (db) => {
       })
       .then(() => {
         return db.query(`
-        SELECT timeslots.*, attractions.*, itineraries.*, first_name, timeslots.id AS id FROM timeslots
+        SELECT timeslots.*, attractions.*, itineraries.*, first_name, last_name, timeslots.id AS id FROM timeslots
         FULL OUTER JOIN attractions ON attraction_id = attractions.id
         FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
         FULL OUTER JOIN users ON submitted_by = users.id
