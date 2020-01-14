@@ -13,6 +13,9 @@ h4 {
   margin: 10px 0;
 }
 
-form {
+.SearchBar {
   position: relative;
+  text-align: left;
+  border: 1px solid #d4d4d4;
+  width: 99%;
 }

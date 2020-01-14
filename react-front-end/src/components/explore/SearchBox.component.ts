@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-  border: 1px solid #D1D0CC;
-  border-radius: 2px;
   height: 40px;
   width: 98%;
   color: black;
@@ -10,14 +8,13 @@ export const Input = styled.input`
   font-size: 16px;
 `;
 
-export const Suggestion = styled.p`
-  color: #F55D3E;
+export const Suggestion = styled.div`
   // position: absolute;
-  width: 90%;
-  background-color: #FCFCFC;
-  // border: 1px solid #d4d4d4;
-  // padding: 12px 16px;
-  // z-index: 99;
+  color: #F55D3E;
+  width: 94%;
+  background-color: #fff;
+  // border: 1px solid #D1D0CC;
+  padding: 10px 10px;
 `;
 export const DatePick = styled.div`
   width: 100%;
