@@ -22,9 +22,10 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   color: white;
-  background-color: #00C3AB;
+  background-color: #76BED0;
   padding: 12px;
   cursor: pointer;
   border: none;
   margin: 10px 0;
+  border-radius: 6px;
 `
