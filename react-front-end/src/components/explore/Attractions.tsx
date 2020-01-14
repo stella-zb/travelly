@@ -20,8 +20,6 @@ import "react-animated-slider/build/horizontal.css";
 interface SwipeProps {
   // style?: React.CSSProperties | undefined
   itinerariesId: number;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  handleNavigate?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 };
 
 interface AttractionsObject {
@@ -39,7 +37,7 @@ interface AttractionsObject {
   category: string
 };
 
-export const AttractionList: FC<SwipeProps> = ({ itinerariesId, handleNavigate }) => {
+export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
 
   const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
   const [city, setCity] = useState<string>('');
