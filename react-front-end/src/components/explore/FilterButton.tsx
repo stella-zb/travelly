@@ -1,21 +1,20 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import styled from "styled-components";
 
 interface FilterProps {
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  setShow: any
 };
 
 const Container = styled.div`
-  position: fixed;
   width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(0,0,0, 0.5);
+  // background-color: rgba(0,0,0, 0.5);
 `;
 
 const Button = styled.button`
@@ -32,10 +31,18 @@ const Button = styled.button`
   font-size: 10px;
   cursor: cursor;
 `;
-export const FilterButton: FC<FilterProps> = ({ handleToggle }) => {
+export const FilterButton: FC<FilterProps> = ({ handleToggle, setShow }) => {
   
+  const [active, setActive] = useState<Boolean>(false)
   handleToggle = () => {
-
+    // e.preventDefault();
+      if (!active) {
+        setShow(true);
+        setActive(true);
+      } else {
+        setShow(false);
+        setActive(false);
+      }
   };
 
   return (
