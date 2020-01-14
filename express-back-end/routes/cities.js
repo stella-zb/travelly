@@ -104,7 +104,7 @@ module.exports = (db) => {
               long: item.venue.location.lng,
               open_time: 32400,
               close_time: 64800,
-              visit_duration: 120,
+              visit_duration: 7200,
               location: item.venue.location.address,
               category: "SCENERY"
             })
@@ -118,7 +118,7 @@ module.exports = (db) => {
               long: item.venue.location.lng,
               open_time: 32400,
               close_time: 64800,
-              visit_duration: 120,
+              visit_duration: 3600,
               location: item.venue.location.address,
               category: "SHOPPING"
             })
@@ -132,7 +132,7 @@ module.exports = (db) => {
               long: item.venue.location.lng,
               open_time: 32400,
               close_time: 64800,
-              visit_duration: 120,
+              visit_duration: 7200,
               location: item.venue.location.address,
               category: "MUSEUM"
             })
@@ -146,21 +146,21 @@ module.exports = (db) => {
               long: item.venue.location.lng,
               open_time: 32400,
               close_time: 64800,
-              visit_duration: 120,
+              visit_duration: 7200,
               location: item.venue.location.address,
               category: "RESTAURANTS/COFFEE SHOPS"
             })
           }
 
         }
-        for (let i = 0; i <= attractionList.length - 1; i ++) {
-          axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-          .then(results => {
-            console.log('Second api successfully');
-            attractionList[i].photo = results.data.response.photos.items[0].prefix + "500x500" + results.data.response.photos.items[0].suffix;
-            console.log(attractionList[i])
-          })
-        }
+        // for (let i = 0; i <= attractionList.length - 1; i ++) {
+        //   axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+        //   .then(results => {
+        //     console.log('Second api successfully');
+        //     attractionList[i].photo = results.data.response.photos.items[0].prefix + "500x500" + results.data.response.photos.items[0].suffix;
+        //     console.log(attractionList[i])
+        //   })
+        // }
 
         for (let trail of results[1].data.trails) {
           if (trail.imgMedium !== "") {
