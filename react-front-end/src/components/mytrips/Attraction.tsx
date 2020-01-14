@@ -73,7 +73,7 @@ export const Attraction = ({
       url(${img});
     background-size: 100%;
     background-position: center;
-    border-radius: 15px;
+    border-radius: 10px;
     height: 100px;
   `;
 

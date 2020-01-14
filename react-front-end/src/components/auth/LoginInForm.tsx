@@ -43,7 +43,7 @@ export const LoginInForm = ({ setLogin }: LogInTypes) => {
 
   return (
     !!user.id ? <Redirect to='/explore' /> : <AuthForm onSubmit={login}>
-      <h1>Login In</h1>
+      <h1>Log In</h1>
       <Input
         placeholder="Enter Email"
         value={email}
@@ -63,7 +63,7 @@ export const LoginInForm = ({ setLogin }: LogInTypes) => {
         })}
         required
       />
-      <Button type="submit">Login In</Button>
+      <Button type="submit">Log In</Button>
       {error.length > 0 && <p>{error}</p>}
     </AuthForm>
   );
