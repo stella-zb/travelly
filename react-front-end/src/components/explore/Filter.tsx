@@ -5,30 +5,40 @@ import { FilterButton } from "./FilterButton";
 
 interface FilterProps {
   attractions: Array<any>;
-  // handleFilter?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  setFilters: any
-  // checked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setFilters: any,
 };
 const Button = styled.button`
   text-align: right;
   margin: 20px 10px;
   background-color: 
   border: solid;
-  background: #FFD800;
+  background: #F55D3E;
   height: 30px;
   border-radius: 15px;
   text-transform: uppercase;
-  padding: 15px 10px;
+  padding: 10px 10px;
   font-weight: 400;
   font-size: 10px;
   cursor: cursor;
 `;
 const FilterTab = styled.div`
-  display: flex;
-  height: 200px;
+  display: block;
+  height: 400px;
+  width: 330px;
+  z-index:999;
+  background-color: #FCFCFC;
+  border-radius: 15px;
+  color: #F55D3E;
+  opacity: 1;
+  position: absolute;
+  margin: 25% 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  visibility
 `;
 const Input = styled.input`
   // display: flex;
@@ -37,6 +47,7 @@ const Input = styled.input`
 export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle }) => {
   
   const [categoryFilters, setCategoryfilters] = useState<Array<any>>([]);
+  const [show, setShow] = useState<Boolean>(false);
 
   useEffect(() => {
     let categoryFilters = [
@@ -72,42 +83,46 @@ export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle
     });
     
     setFilters(selectedFilters);
-    
+    setShow(false);
   };
 
-  handleToggle = () => {
-
-  };
+ 
 
   return (
     <Fragment>
-      <FilterButton onClick={handleToggle}>Filter</FilterButton>
-      <form>
+      <FilterButton setShow={setShow} onClick={handleToggle}>Filter</FilterButton>
+      {show ?
       <FilterTab>
-        {categoryFilters.map((filter1) => (
-          <div>
-            <Input
-              key={filter1.id}
-              type="checkbox"
-              name={`${filter1}`}
-              onChange={(e) => {
-                let checked = e.target.checked;
-                setCategoryfilters(
-                  categoryFilters.map(filter2 => {
-                    if (filter2.id === filter1.id) {
-                      filter2.select = checked;
-                    }
-                    return filter2;
-                  })
-                )}
-              }
-              checked={filter1.select}
-            />{filter1.category}
-          </div>
-        ))}
+        <form>
+          <h3>Filtered By:</h3>
+          {categoryFilters.map((filter1) => (
+            <ul>
+              <Input
+                key={filter1.id}
+                type="checkbox"
+                name={`${filter1}`}
+                onChange={(e) => {
+                  let checked = e.target.checked;
+                  setCategoryfilters(
+                    categoryFilters.map(filter2 => {
+                      if (filter2.id === filter1.id) {
+                        filter2.select = checked;
+                      }
+                      return filter2;
+                    })
+                  )}
+                }
+                checked={filter1.select}
+              />{filter1.category}
+            </ul>
+          ))}
+        </form>
+        <Button type="submit" onClick={handleSubmit}>Set Filter</Button>
       </FilterTab>
-      </form>
-      <Button type="submit" onClick={handleSubmit}>Set Filter</Button>
+      :
+      <>
+      </>
+      }
     </Fragment>
   );
 };

@@ -27,6 +27,7 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
     .then(results => {
+      console.log(results.data);
       res.json(results.data);
     });
   });
