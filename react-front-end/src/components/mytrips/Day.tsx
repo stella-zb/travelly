@@ -13,7 +13,7 @@ export const Day = ({ number, selectDay, selected }: PropTypes) => {
     text-transform: uppercase;
   `
   const DayNum = styled.div`
-    background: ${selected === number ? '#76BED0' : '#FFF'}
+    background: ${selected === number ? '#76BED0' : 'inherit'}
     border-radius: 50%;
     height: 25px;
     width: 25px;

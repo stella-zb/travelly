@@ -31,13 +31,22 @@ const Icon = styled.img`
 `
 
 const Container = styled.div`
-  height: calc(100vh + 120px);
-  background: #EFFBFF;
   padding-top: 25px;
 `
 
 const Copy = styled.p`
   font-size: 13px;
+`
+
+const Transit = styled.div`
+  font-size: 13px;
+  border-bottom: 1px dashed #8b8589;
+  line-height: 0.1em;
+`
+
+const Span = styled.span`
+  background: #FCFCFC;
+  padding: 0 10px;
 `
 
 const getIcon = (type:string) => {
@@ -60,11 +69,11 @@ export const List = ({timeslots, deleteAttraction}: PropTypes) => {
     const end = moment.unix(slot.end_time);
 
     if (slot.attraction_id === null && slot.travel_mode == 'WALKING') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv><Copy>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Copy></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'TRANSIT') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv><Copy>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Copy></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'CAR') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv><Copy>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Copy></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}<Copy>{moment.unix(slot.start_time).utc().format('hh:mm a')}</Copy></IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} submitter={slot.first_name} /></ContentDiv></Timeslot>
     }
