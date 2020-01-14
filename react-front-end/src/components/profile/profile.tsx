@@ -56,7 +56,7 @@ export const Profile = (setLogout: any) => {
           <p>Hello! {user.first_name}</p>
           <p>{user.email}</p>
           <p>{user.facebook}</p>
-          <Button type="submit">Login Out</Button>
+          <Button type="submit">Log Out</Button>
         </MainInfo>
       </UserInfo>
     </>
