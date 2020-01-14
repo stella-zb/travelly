@@ -15,7 +15,6 @@ export const ItineraryBody = ({timeslots, deleteAttraction}: PropTypes) => {
     {view === 'map' && <Map places={timeslots} />}
     
     {view === 'list' ? <Button text="map" click={() => setView('map')} /> : <Button text="list" click={() => setView('list')} />}
-
     </>
   )
 }
