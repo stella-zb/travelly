@@ -84,7 +84,8 @@ export const AttractionList = ({ id, attractions, deleteAttraction, setInvite, g
               img={attraction.photo}
               editable={true}
               deleteAttraction={deleteAttraction}
-              submitter={attraction.first_name}
+              firstName={attraction.first_name}
+              lastName={attraction.last_name}
             />
           </AttractionItem>
         )}

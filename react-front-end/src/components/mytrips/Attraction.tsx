@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type PropTypes = { id: number, name: string, img: string, editable: boolean, deleteAttraction: any, submitter:string|null }
+type PropTypes = { id: number, name: string, img: string, editable: boolean, deleteAttraction: any, firstName:string|null, lastName:string|null }
 
 const Name = styled.div`
   text-align: center;
@@ -17,11 +17,12 @@ const Name = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  background: rgba(0, 0, 0, 0.7);
+  background: #F55D3E;
   border: solid 1px #F55D3E;
-  color: #F55D3E;
+  color: #FCFCFC;
   border-radius: 15px;
   font-size: 12px;
+  font-weight: 600;
 `
 
 const Submitter = styled.div`
@@ -29,14 +30,14 @@ const Submitter = styled.div`
   color: #fff;
   border: solid 1px #fff;
   border-radius: 50%
-  height: 20px;
-  width: 20px;
-  line-height: 20px;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
   margin-top: 4px;
   float: right;
   position: relative;
   left: 5px;
-  font-size: 11px;
+  font-size: 10px;
 `
 
 const Actions = styled.div`
@@ -45,7 +46,7 @@ const Actions = styled.div`
   bottom: 15px;
 `
 
-export const Attraction = ({id, name, img, editable, deleteAttraction, submitter}: PropTypes) => {
+export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName}: PropTypes) => {
   const Container = styled.div`
     padding: 10px 20px 15px 20px;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${img});
@@ -57,7 +58,7 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, submitter
 
   return (
     <Container>
-        {submitter && <Submitter>{submitter[0]}</Submitter>}
+      {firstName && <Submitter>{firstName[0]}{lastName[0]}</Submitter>}
       <Name><h2>{name}</h2></Name>
       
       <Actions>
