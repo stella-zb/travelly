@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, useEffect } from 'react';
+import React, { FC, Fragment, useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { FilterButton } from "./FilterButton";
@@ -8,13 +8,13 @@ interface FilterProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  setFilters: any,
-};
+  setFilters: any;
+}
 const Button = styled.button`
   text-align: right;
   margin: 20px 10px;
   background-color: 
-  border: solid;
+  border: none;
   background: #F55D3E;
   height: 30px;
   border-radius: 15px;
@@ -44,8 +44,11 @@ const Input = styled.input`
   // display: flex;
   font-size: 10px;
 `;
-export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle }) => {
-  
+export const Filter: FC<FilterProps> = ({
+  setFilters,
+  handleSubmit,
+  handleToggle
+}) => {
   const [categoryFilters, setCategoryfilters] = useState<Array<any>>([]);
   const [show, setShow] = useState<Boolean>(false);
 
@@ -54,8 +57,8 @@ export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle
       { id: 1, category: "SCENERY" },
       { id: 2, category: "SHOPPING" },
       { id: 3, category: "RESTAURANTS/COFFEE SHOPS" },
-      { id:4, category: "TRAILS" },
-      { id:5, category: "MUSEUM" }
+      { id: 4, category: "TRAILS" },
+      { id: 5, category: "MUSEUM" }
     ];
 
     setCategoryfilters(
@@ -66,63 +69,65 @@ export const Filter: FC<FilterProps> = ({ setFilters, handleSubmit, handleToggle
           category: filter.category
         };
       })
-    )
+    );
   }, []);
 
   // console.log(categoryFilters);
 
-  handleSubmit = (e) => {  
+  handleSubmit = e => {
     // e.preventDefault();
     let selectedFilters: Array<any>;
     selectedFilters = [];
     categoryFilters.map(filter => {
       if (filter.select === true) {
         selectedFilters.push(filter.category);
-      };
+      }
       return selectedFilters;
     });
-    
+
     setFilters(selectedFilters);
     setShow(false);
   };
 
- 
-
   return (
     <Fragment>
-      <FilterButton setShow={setShow} onClick={handleToggle}>Filter</FilterButton>
-      {show ?
-      <FilterTab>
-        <form>
-          <h3>Filtered By:</h3>
-          {categoryFilters.map((filter1) => (
-            <ul>
-              <Input
-                key={filter1.id}
-                type="checkbox"
-                name={`${filter1}`}
-                onChange={(e) => {
-                  let checked = e.target.checked;
-                  setCategoryfilters(
-                    categoryFilters.map(filter2 => {
-                      if (filter2.id === filter1.id) {
-                        filter2.select = checked;
-                      }
-                      return filter2;
-                    })
-                  )}
-                }
-                checked={filter1.select}
-              />{filter1.category}
-            </ul>
-          ))}
-        </form>
-        <Button type="submit" onClick={handleSubmit}>Set Filter</Button>
-      </FilterTab>
-      :
-      <>
-      </>
-      }
+      <FilterButton setShow={setShow} onClick={handleToggle}>
+        Filter
+      </FilterButton>
+      {show ? (
+        <FilterTab>
+          <form>
+            <h3>Filtered By:</h3>
+            {categoryFilters.map(filter1 => (
+              <ul>
+                <Input
+                  key={filter1.id}
+                  type="checkbox"
+                  name={`${filter1}`}
+                  onChange={e => {
+                    let checked = e.target.checked;
+                    setCategoryfilters(
+                      categoryFilters.map(filter2 => {
+                        if (filter2.id === filter1.id) {
+                          filter2.select = checked;
+                        }
+                        return filter2;
+                      })
+                    );
+                  }}
+                  checked={filter1.select}
+                />
+                {filter1.category}
+              </ul>
+            ))}
+          </form>
+          <Button type="submit" onClick={handleSubmit}>
+            Set Filter
+          </Button>
+        </FilterTab>
+      ) : (
+        <></>
+      )}
     </Fragment>
   );
 };
