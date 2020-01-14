@@ -6,7 +6,8 @@ const HIKING_KEY = process.env.HIKING_API;
 const TIX_KEY = process.env.TIX_API;
 const axios = require('axios');
 const moment = require('moment');
-// const request = require('requestn-promise-native');
+
+const {addFSData} = require('../helpers/addFSData');
 
 module.exports = (db) => {
   const CancelToken = axios.CancelToken;
@@ -90,96 +91,38 @@ module.exports = (db) => {
           // axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${lng}`)
         ])
       })
-      .then(results => {
+      .then(([res1, res2]) => {
         console.log('First api successfully');
-        for (let item of results[0].data.response.groups[0].items) {
-          const category = item.venue.categories[0].shortName;
-          if (category.includes("Park") || category.includes("Beach") || category.includes("Trail") || category.includes("Garden"))  {
-            attractionList.push({
-              id: item.venue.id,
-              name: item.venue.name,
-              description: '',
-              review: '',
-              lat: item.venue.location.lat,
-              long: item.venue.location.lng,
-              open_time: 32400,
-              close_time: 64800,
-              visit_duration: 7200,
-              location: item.venue.location.address,
-              category: "SCENERY"
-            })
-          } else if (category.includes("Store") || category.includes("Shop") || category.includes("Market") | category.includes("Supermarket") | category.includes("Mall")) {
-            attractionList.push({
-              id: item.venue.id,
-              name: item.venue.name,
-              description: '',
-              review: '',
-              lat: item.venue.location.lat,
-              long: item.venue.location.lng,
-              open_time: 32400,
-              close_time: 64800,
-              visit_duration: 3600,
-              location: item.venue.location.address,
-              category: "SHOPPING"
-            })
-          } else if (category.includes("Museum")) {
-            attractionList.push({
-              id: item.venue.id,
-              name: item.venue.name,
-              description: '',
-              review: '',
-              lat: item.venue.location.lat,
-              long: item.venue.location.lng,
-              open_time: 32400,
-              close_time: 64800,
-              visit_duration: 7200,
-              location: item.venue.location.address,
-              category: "MUSEUM"
-            })
-          } else if (category.includes("Restaurant") || category.includes("Coffee Shop") || category.includes("Eatery")) {
-            attractionList.push({
-              id: item.venue.id,
-              name: item.venue.name,
-              description: '',
-              review: '',
-              lat: item.venue.location.lat,
-              long: item.venue.location.lng,
-              open_time: 32400,
-              close_time: 64800,
-              visit_duration: 7200,
-              location: item.venue.location.address,
-              category: "RESTAURANTS/COFFEE SHOPS"
-            })
+        addFSData(res1.data.response.groups[0].items, attractionList);
+        
+        return Promise.all(attractionList.map(attraction => {
+          return axios.get(`https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+        }))
+        .then((results) => {
+          attractionList.map((attraction, index) => {
+            attraction.photo = results[index].data.response.photos.items[0].prefix + "500x500" + results[index].data.response.photos.items[0].suffix;
+          })
+          for (let trail of res2.data.trails) {
+            if (trail.imgMedium !== "") {
+              attractionList.push({
+                id: trail.id,
+                name: trail.name,
+                description: trail.summary,
+                review: trail.stars,
+                lat: trail.latitude,
+                long: trail.longitude,
+                open_time: 32400,
+                close_time: 64800,
+                visit_duration: 21600,
+                photo: trail.imgMedium,
+                location: trail.location,
+                category: 'TRAILS'
+              })
+            }
           }
+        })
 
-        }
-        // for (let i = 0; i <= attractionList.length - 1; i ++) {
-        //   axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-        //   .then(results => {
-        //     console.log('Second api successfully');
-        //     attractionList[i].photo = results.data.response.photos.items[0].prefix + "500x500" + results.data.response.photos.items[0].suffix;
-        //     console.log(attractionList[i])
-        //   })
-        // }
 
-        for (let trail of results[1].data.trails) {
-          if (trail.imgMedium !== "") {
-            attractionList.push({
-              id: trail.id,
-              name: trail.name,
-              description: trail.summary,
-              review: trail.stars,
-              lat: trail.latitude,
-              long: trail.longitude,
-              open_time: 32400,
-              close_time: 64800,
-              visit_duration: 21600,
-              photo: trail.imgMedium,
-              location: trail.location,
-              category: 'TRAILS'
-            })
-          }
-        }
         // for (let event of results[2].data._embedded.events) {
         //   const test = moment.utc(event.dates.start.dateTime).format();
         //   console.log(test)  
@@ -200,7 +143,6 @@ module.exports = (db) => {
         // }
       })
       .then(() => {
-        // console.log('check point 2',attractionList)
         res.json([attractionList, city]);
       })
       .catch((err) => {
