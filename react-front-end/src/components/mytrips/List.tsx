@@ -16,7 +16,7 @@ const Timeslot = styled.div`
 `
 
 const ContentDiv = styled.div`
-  width: 75%;
+  width: 73%;
   text-align: center;
 `
 
@@ -28,6 +28,16 @@ const IconDiv = styled.div`
 `
 const Icon = styled.img`
   width: 30px;
+`
+
+const Container = styled.div`
+  height: calc(100vh + 120px);
+  background: #EFFBFF;
+  padding-top: 25px;
+`
+
+const Transit = styled.p`
+  font-size: 13px;
 `
 
 const getIcon = (type:string) => {
@@ -50,11 +60,11 @@ export const List = ({timeslots, deleteAttraction}: PropTypes) => {
     const end = moment.unix(slot.end_time);
 
     if (slot.attraction_id === null && slot.travel_mode == 'WALKING') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv><Transit>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'TRANSIT') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv><Transit>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'CAR') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv><Transit>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Transit></ContentDiv></Timeslot>
     } else {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} submitter={slot.first_name} /></ContentDiv></Timeslot>
     }
@@ -62,9 +72,11 @@ export const List = ({timeslots, deleteAttraction}: PropTypes) => {
 
   return (
     <>
-    {timeslots.map(slot =>
-      categorizeTimeslot(slot)
-    )}
+    <Container>
+      {timeslots.map(slot =>
+        categorizeTimeslot(slot)
+          )}
+      </Container>
     </>
   )
 }

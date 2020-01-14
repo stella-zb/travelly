@@ -6,7 +6,8 @@ import map from '../../images/map.svg';
 type PropTypes = { text: string, click:any }
 
 const Btn = styled.div`
-  background: #ffc0cb;
+  background: #F7CB15;
+  border: 1px solid #B29210;
   border-radius: 50%;
   height: 80px;
   width: 80px;
