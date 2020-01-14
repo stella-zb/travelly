@@ -67,9 +67,6 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId, handleNavigate }
     .catch((err) => console.log(err));
   },[filters]);
   
-  // handleNavigate = () => {
-  //   return <Redirect to={`/trips/:${itinerariesId}`}/>;
-  // }
   return (
     <Container>
       <TopBar>
