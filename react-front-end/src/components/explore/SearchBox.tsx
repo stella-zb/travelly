@@ -43,7 +43,8 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
       result = res.data.predictions
       suggestion =[];
       result.map(each => {
-        suggestion.push(each.description.split(',')[0])
+        // suggestion.push(each.description.split(',')[0])
+        suggestion.push(each.description)
       })
       setSearch({ query: city, results: suggestion })
     }) 
@@ -132,7 +133,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
           />
         </div>  
       </DatePick>
-      <Button onClick={handleSubmit}>Search</Button>
+      <Button type="button" onClick={handleSubmit}>Search</Button>
 
     </Fragment>
   );
