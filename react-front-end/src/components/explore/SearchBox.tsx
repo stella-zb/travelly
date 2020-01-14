@@ -47,6 +47,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
           // suggestion.push(each.description.split(',')[0])
           suggestion.push(each.description)
         })
+        setSearch({ query: city, results: suggestion })
       })
   };
 
