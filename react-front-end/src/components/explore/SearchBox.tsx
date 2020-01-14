@@ -4,7 +4,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { Wrapper, Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component"
+import { Wrapper, Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component";
 import './SearchBox.css';
 
 
@@ -22,6 +22,8 @@ interface SearchObj {
 };
 
 export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
+
+  const [focus, setFocus] = useState<boolean>(false)
 
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
@@ -113,10 +115,12 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
                 placeholder="Please enter your destination"
                 onChange={handleInputChange}
                 value={search.query}
+                onFocus={() => setFocus(true)}
+                onBlur={() => setFocus(false)}
               />
 
-              {search.results.map(result => (
-                <Suggestion>{result}</Suggestion>
+              {focus && search.results.map(result => (
+                <Suggestion onClick={() => setSearch(result)}>{result}</Suggestion>
               ))}
             </form>
           </div>
