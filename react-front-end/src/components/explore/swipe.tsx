@@ -84,9 +84,7 @@ export const Swipe: FC<SwipeProps> = ({
                 <Inner className="inner">
                   <Name>{item.name}</Name>
                   <Description>{item.location}</Description>
-                  <Button type="submit" value={item}>
-                    Select
-                  </Button>
+                  <Button type="submit" value={item}>Select</Button>
                 </Inner>
               </SliderContent>
             </form>
