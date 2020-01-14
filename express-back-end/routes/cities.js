@@ -9,6 +9,17 @@ const moment = require('moment');
 
 const {addFSData} = require('../helpers/addFSData');
 
+const cityImgData = {
+  VANCOUVER: 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg',
+  TORONTO: 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  DUBAI: 'https://www.thenational.ae/image/policy:1.869199:1569838554/bz03-Money-col.jpg?f=16x9&w=1200&$p$f$w=5ab25ec',
+  TOKYO: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+  LONDON: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+  "NEW YORK CITY": 'https://img.theculturetrip.com/768x432/wp-content/uploads/2019/01/fda03y.jpg',
+  SYDNEY: 'https://media-cdn.tripadvisor.com/media/photo-c/2560x500/08/d8/b7/f1/sydney-opera-house-sydney.jpg',
+  OTHERS: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqH_sN0GBELqyCXJmZAqovNQ7f_4EUBFSnP-OOTdTmEF1HGw2jXA&s'
+};
+
 module.exports = (db) => {
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
@@ -16,6 +27,7 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
     .then(results => {
+      console.log(results.data);
       res.json(results.data);
     });
   });
@@ -24,9 +36,9 @@ module.exports = (db) => {
     console.log('Post itinerary successfully');
     let itinerariesId;
     const userId = req.query.user;
-    console.log(req.query.user)
-    let { city, cityImg, tripStart, tripEnd } = req.body;
+    let { city, tripStart, tripEnd } = req.body;
     city = city.toUpperCase();
+    cityImgData[city] ? cityImg = cityImgData[city] : cityImg = cityImgData.OTHERS;
     db.query(
       `SELECT * FROM itineraries
       WHERE city = $1 AND trip_start = $2 AND trip_end = $3;

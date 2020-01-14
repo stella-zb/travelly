@@ -15,15 +15,24 @@ const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   height: 70px;
   padding: 10px;
   margin: 0px;
+  border-bottom: 1px solid #A4ADA6;
+  background: #E5F9FF;
 `
 
 const ActionIcon = styled.img`
-  width: 40px;
+  width: 30px;
   margin-right: 5px;
   margin-left: 5px;
+`
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 type PropTypes = { editAction: any, length: Array<string>, selected:string, onClick:any, setInvite:any }
@@ -39,10 +48,10 @@ export const ItineraryHeader = ({editAction, length, onClick, selected, setInvit
         )}
       </Days>
 
-      <div>
-        <InviteIcon id={id} setInvite={() => setInvite(true)} />
+      <Actions>
         <ActionIcon src={edit} onClick={editAction} />
-      </div>
+        <InviteIcon id={id} setInvite={() => setInvite(true)} />
+      </Actions>
 
     </Header>
   )

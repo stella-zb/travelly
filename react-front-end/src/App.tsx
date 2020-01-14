@@ -92,14 +92,15 @@ export default function App() {
 
 
   return (
+    <div className="App">
     <Router>
 
       {user &&
         <NavDiv>
           <NavList>
-            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
-            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
-            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
+            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Explore</NavItem></li>
+            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>My Trips</NavItem></li>
+            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Profile</NavItem></li>
           </NavList>
         </NavDiv>}
 
@@ -134,7 +135,8 @@ export default function App() {
             </Route>
           </>}
       </Switch>
-    </Router>
+      </Router>
+      </div>
   )
 }
 

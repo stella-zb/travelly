@@ -16,7 +16,7 @@ const Timeslot = styled.div`
 `
 
 const ContentDiv = styled.div`
-  width: 75%;
+  width: 73%;
   text-align: center;
 `
 
@@ -28,6 +28,25 @@ const IconDiv = styled.div`
 `
 const Icon = styled.img`
   width: 30px;
+`
+
+const Container = styled.div`
+  padding-top: 25px;
+`
+
+const Copy = styled.p`
+  font-size: 13px;
+`
+
+const Transit = styled.div`
+  font-size: 13px;
+  border-bottom: 1px dashed #8b8589;
+  line-height: 0.1em;
+`
+
+const Span = styled.span`
+  background: #FCFCFC;
+  padding: 0 10px;
 `
 
 const getIcon = (type:string) => {
@@ -45,26 +64,28 @@ const getIcon = (type:string) => {
 type PropTypes = { timeslots: Array<any>, deleteAttraction: any }
 
 export const List = ({timeslots, deleteAttraction}: PropTypes) => {
-  const categorizeTimeslot = (slot: {id:number, attraction_id:number, name:string, photo:string, travel_mode:string, start_time:number, end_time:number, lat:number, lng:number, first_name:string|null}) => {
+  const categorizeTimeslot = (slot: {id:number, attraction_id:number, name:string, photo:string, travel_mode:string, start_time:number, end_time:number, first_name:string|null, last_name:string|null}) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
 
     if (slot.attraction_id === null && slot.travel_mode == 'WALKING') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'TRANSIT') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'CAR') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv><Transit><Span>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</Span></Transit></ContentDiv></Timeslot>
     } else {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} submitter={slot.first_name} /></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}<Copy>{moment.unix(slot.start_time).utc().format('hh:mm a')}</Copy></IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} firstName={slot.first_name} lastName={slot.last_name} /></ContentDiv></Timeslot>
     }
   };
 
   return (
     <>
-    {timeslots.map(slot =>
-      categorizeTimeslot(slot)
-    )}
+    <Container>
+      {timeslots.map(slot =>
+        categorizeTimeslot(slot)
+          )}
+      </Container>
     </>
   )
 }
