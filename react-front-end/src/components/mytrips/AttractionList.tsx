@@ -22,7 +22,9 @@ const Title = styled.h1`
 `;
 
 const AddAttr = styled.img`
-  width: 30px;
+  width: 32px;
+  position: relative;
+  top: -2px;
 `;
 
 const Actions = styled.div`
