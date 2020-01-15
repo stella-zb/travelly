@@ -11,13 +11,10 @@ export const Input = styled.input`
 export const Suggestion = styled.div`
   // position: absolute;
   color: #F55D3E;
-  width: 94%;
   background-color: #fff;
-  // border: 1px solid #D1D0CC;
   padding: 10px 10px;
 `;
 export const DatePick = styled.div`
-  width: 100%;
   margin: 10px 0;
 `;
 
@@ -26,7 +23,7 @@ export const Button = styled.button`
   color: #FCFCFC;
   cursor: pointer;
   border: none;
-  width: 100%;
+  width: 101%;
   padding: 15px;
   margin: 25px 0 0 0;
   font-size: 20px;
@@ -39,4 +36,10 @@ export const Header = styled.h2`
 export const Wrapper = styled.div`
   margin: 0 auto;
   padding: 20px;
+  width: 90%;
 `;
+
+export const Error = styled.div`
+  color: #F55D3E;
+  font-weight: bold;
+`
