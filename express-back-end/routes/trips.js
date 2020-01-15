@@ -42,12 +42,12 @@ module.exports = (db) => {
               WHERE itinerary_id = itineraries.id AND itinerary_id = $1;
               `, [req.params.id]
             )
-            .then(() => {
-              return db.query(`
+              .then(() => {
+                return db.query(`
             DELETE from timeslots
             WHERE itinerary_id = $1 AND travel_mode IS NOT NULL;
             `, [req.params.id])
-            })
+              })
           }
         }
       })
@@ -60,7 +60,7 @@ module.exports = (db) => {
         WHERE itinerary_id = $1 
         ORDER BY start_time;`, [req.params.id])
       })
-    .then((response) => res.json(response.rows))
+      .then((response) => res.json(response.rows))
   })
 
   router.post('/:id', async (req, res) => {
@@ -75,7 +75,6 @@ module.exports = (db) => {
       `, [req.params.id]
     )
     const data = getData.rows
-    // console.log('data from db:', data)
 
     // use kmean library to cluster the locations in order
     let itineraries = [];
@@ -88,10 +87,8 @@ module.exports = (db) => {
       return Math.round((end - start) / 86400)
     }
 
-    // console.log('number of attractions', data.length)
-    // console.log('planned days length', getDays(data[0].trip_start, data[0].trip_end))
+    // condition if selected attractions is dividable by the selected day
     if (data.length >= getDays(data[0].trip_start, data[0].trip_end)) {
-      // K refers to number of days
       const cluster = kmeans.clusterize(vectors, { k: getDays(data[0].trip_start, data[0].trip_end) }, (err, res) => {
         if (err) console.error(err);
         else {
@@ -106,7 +103,6 @@ module.exports = (db) => {
         itineraries.push(element.clusterInd);
       });
     } else {
-      // console.log('attractions data for the trip', data)
       for (const attraction of data) {
         itineraries.push([attraction]);
       }
@@ -114,9 +110,7 @@ module.exports = (db) => {
     }
 
     // dataset after kmean clustering:
-    // [[{ attraction }, { attraction }, ...],[{ attraction }, { attraction }, ...],...]
     const trip = getTimeForSchedule(itineraries);
-    // console.log('data after kmean:', trip)
 
     return getTravelTime(trip, axiosCallback)
       .then(() => end_data(trip))
