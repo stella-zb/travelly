@@ -46,9 +46,7 @@ export const Swipe: FC<SwipeProps> = ({
   handleSubmit = (item: AttractionsObject) => {
     console.log("check");
 
-    // const CancelToken = axios.CancelToken;
-    // const source = CancelToken.source();
-
+    
     axios.defaults.baseURL = "http://localhost:8081";
     axios(`/api/itineraries/${itinerariesId}`, {
       method: "post",
@@ -59,12 +57,13 @@ export const Swipe: FC<SwipeProps> = ({
       params: {
         user: localStorage.userID,
       },
-      // cancelToken: source.token
     }).then(() => {
       console.log('post attraction')
       // history.push(`/explore/:${search.query}`);
+    })
+    .catch((err) => {
+      console.log(err);
     });
-    // .catch((err) => console.log(err))
   };
 
   return (
