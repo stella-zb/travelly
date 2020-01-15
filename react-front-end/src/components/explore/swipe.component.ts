@@ -27,6 +27,7 @@ export const animation1 = keyframes`
 export const Container = styled.div`
   grid-template-rows: 10% 80% 10%;
   background: #E5F9FF;
+  height: calc(100vh + 10px);
 
 `;
 
@@ -126,5 +127,7 @@ export const NavButton = styled.button`
   text-transform: uppercase;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;                         
+  cursor: cursor;
+  position: relative;
+  bottom: 240px;                     
 `;
