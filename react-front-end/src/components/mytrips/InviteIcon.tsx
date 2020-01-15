@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import add from '../../images/add-contact.svg';
+import add from '../../images/add-user.png';
 
 const ActionIcon = styled.img`
-  width: 40px;
+  width: 35px;
   margin-right: 5px;
   margin-left: 5px;
 `

@@ -1,0 +1,22 @@
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container > input {
+  border: 1px solid #D1D0CC;
+  padding: 10px;
+  width: 95%;
+  font-size: 12px;
+  text-align: center;
+}
+
+h4 {
+  margin: 10px 0;
+}
+
+.SearchBar {
+  position: relative;
+  text-align: left;
+  border: 1px solid #d4d4d4;
+  width: 100%;
+}

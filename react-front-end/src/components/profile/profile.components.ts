@@ -18,11 +18,12 @@ export const MainInfo = styled.div`
 
 export const Button = styled.button`
   color: white;
-  background-color: #00C3AB;
+  background-color: #76BED0;
   width: 75%;
   padding: 10px 20px;
   cursor: pointer;
   border: none;
   margin: 10px 0;
   font-size: 20px;
+  border-radius: 6px;
 `

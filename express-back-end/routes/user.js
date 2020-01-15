@@ -27,7 +27,7 @@ module.exports = (db) => {
     login(email, password)
       .then(user => {
         if (user === null) {
-          res.send({ error: "Access Denied! Double check your email or passport" })
+          res.send({ error: "Access Denied! Double check your email or password" })
         } else {
           req.session.userId = user.id;
           res.send({

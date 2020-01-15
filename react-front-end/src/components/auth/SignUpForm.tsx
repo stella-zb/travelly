@@ -3,14 +3,6 @@ import { AuthForm, Input, Button } from "./Auth.components";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
 
-interface Credentials {
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  facebook?: string;
-  password?: string;
-}
-
 interface User {
   id?: number;
   firstname?: string;
@@ -20,7 +12,9 @@ interface User {
   password?: string;
 }
 
-export const SignUpForm = (data: Credentials) => {
+type LogInTypes = { setLogin: any };
+
+export const SignUpForm = ({ setLogin }: LogInTypes) => {
   // user input state
   const [{ firstname, lastname, email, facebook, password }, setCredentials] = useState({
     firstname: '',
@@ -49,10 +43,12 @@ export const SignUpForm = (data: Credentials) => {
         if (res.data.error) {
           return setError(res.data.error);
         } else {
-          localStorage.setItem('userID', res.data.user);
+          localStorage.setItem('userID', res.data.user.id);
           setUser(res.data.user)
+          setLogin()
         }
-      }).catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   };
 
   return (
