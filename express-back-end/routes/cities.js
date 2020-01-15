@@ -122,7 +122,7 @@ module.exports = db => {
           const { lat, lng } = results.data.results[0].geometry.location;
           return Promise.all([
             axios.get(
-              `https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=5&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`
+              `https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=5&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
             ),
             axios.get(
               `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=150&key=${HIKING_KEY}`
@@ -137,7 +137,7 @@ module.exports = db => {
           // return Promise.all(
           //   attractionList.map(attraction => {
           //     return axios.get(
-          //       `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`
+          //       `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
           //     );
           //   })
           // ).then(results => {
