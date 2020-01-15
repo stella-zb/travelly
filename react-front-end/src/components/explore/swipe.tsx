@@ -85,12 +85,17 @@ export const Swipe: FC<SwipeProps> = ({
                 key={index}
                 className="slider-content"
                 style={{
-                  background: `url('${item.photo}') no-repeat center center`,
+                  background: `linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.65)
+                  ), url('${item.photo}') no-repeat center center`,
                   borderRadius: "15px",
                   border: "solid",
                   backgroundSize: "cover",
                   borderColor: "#FCFCFC",
-                  borderWidth: "2px"
+                  borderWidth: "2px",
+                  color: "#FCFCFC"
 
                 }}
               >
