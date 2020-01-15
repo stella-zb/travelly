@@ -127,5 +127,7 @@ export const NavButton = styled.button`
   text-transform: uppercase;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;                         
+  cursor: cursor;
+  position: relative;
+  bottom: 240px;                     
 `;
