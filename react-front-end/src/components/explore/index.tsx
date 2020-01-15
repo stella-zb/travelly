@@ -20,17 +20,17 @@ type ExploreProps = {
 
 export const Explore: React.FC<ExploreProps> = () => {
   
-    return (
-      // <Router>
-        <Switch>
-          <Route exact path='/explore'>
-            <SearchBar />
-            <DestRec cityName="Van" topRecommended="Vancouver"/>
-          </Route>
-          <Route path={`/explore/:itinerariesId`} render={({match}) => (
-            <AttractionList itinerariesId ={match.params.itinerariesId}/>)}/>
-        </Switch>
+  return (
+    // <Router>
+      <Switch>
+        <Route exact path='/explore'>
+          <SearchBar />
+          <DestRec cityName="Van" topRecommended="Vancouver"/>
+        </Route>
+        <Route path={`/explore/:itinerariesId`} render={({match}) => (
+          <AttractionList itinerariesId ={match.params.itinerariesId}/>)}/>
+      </Switch>
 
-      // </Router>
-    )
+    // </Router>
+  )
 }
