@@ -3,10 +3,9 @@ import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
-import { Wrapper, Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component";
+import { Wrapper, DatePick, Button, Header } from "./SearchBox.component";
+import { SearchForm } from "./SearchForm";
 import './SearchBox.css';
-
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,8 +21,6 @@ interface SearchObj {
 };
 
 export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
-
-  const [focus, setFocus] = useState<boolean>(false)
 
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
@@ -107,23 +104,11 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
       <Wrapper>
         <Fragment>
           <Header>Where do you travel to next?</Header>
-          <div className="SearchBar">
-            <form>
-              <Input
-                type="text"
-                id="search-input"
-                placeholder="Please enter your destination"
-                onChange={handleInputChange}
-                value={search.query}
-                onFocus={() => setFocus(true)}
-                onBlur={() => setFocus(false)}
-              />
-
-              {focus && search.results.map(result => (
-                <Suggestion onClick={() => setSearch(result)}>{result}</Suggestion>
-              ))}
-            </form>
-          </div>
+          <SearchForm
+            handleInputChange={handleInputChange}
+            search={search}
+            setSearch={setSearch}
+          />
           <DatePick>
             <div>
               <h4>Start Date</h4>
