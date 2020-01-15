@@ -11,7 +11,7 @@ const addFSData = (rawData, outputAttractions) => {
         long: i.venue.location.lng,
         open_time: 32400,
         close_time: 64800,
-        visit_duration: 120,
+        visit_duration: 7200,
         location: i.venue.location.address,
         category: "SCENERY"
       })
@@ -25,7 +25,7 @@ const addFSData = (rawData, outputAttractions) => {
         long: i.venue.location.lng,
         open_time: 32400,
         close_time: 64800,
-        visit_duration: 120,
+        visit_duration: 3600,
         location: i.venue.location.address,
         category: "SHOPPING"
       })
@@ -39,7 +39,7 @@ const addFSData = (rawData, outputAttractions) => {
         long: i.venue.location.lng,
         open_time: 32400,
         close_time: 64800,
-        visit_duration: 120,
+        visit_duration: 7200,
         location: i.venue.location.address,
         category: "SHOPPING"
       })
@@ -53,7 +53,7 @@ const addFSData = (rawData, outputAttractions) => {
         long: i.venue.location.lng,
         open_time: 32400,
         close_time: 64800,
-        visit_duration: 120,
+        visit_duration: 7200,
         location: i.venue.location.address,
         category: "RESTAURANTS/COFFEE SHOPS"
       })
