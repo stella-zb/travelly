@@ -58,7 +58,6 @@ export const Swipe: FC<SwipeProps> = ({
       // withCredentials: true
       params: {
         user: localStorage.userID,
-        key: Math.floor(Math.random() * Math.floor(10))
       },
       // cancelToken: source.token
     }).then(() => {
