@@ -11,38 +11,41 @@ interface FilterProps {
   setFilters: any;
 }
 const Button = styled.button`
-  text-align: right;
-  margin: 20px 10px;
-  background-color: 
-  border: none;
+  text-align: center;
+  // margin: 20px 10px;
+  border: 0;
   background: #F55D3E;
   height: 30px;
+  width: 120px;
   border-radius: 15px;
   text-transform: uppercase;
-  padding: 10px 10px;
+  padding: 10px 20px;
   font-weight: 400;
   font-size: 10px;
   cursor: cursor;
 `;
 const FilterTab = styled.div`
-  display: flex;
-  height: 60vh;
+  display: block;
+  height: 40vh;
   width: 85vw;
   z-index:9999;
-  background-color: #878E88;
+  background-color: #fcfcfc;
   border-radius: 15px;
   color: #00000;
   opacity: 1;
   position: absolute;
-  margin: 25% auto;
+  margin: 30% auto;
   margin-left: 5vw
-  justify-content: center;
+  text-align: left;
+  // justify-content: center;
   align-items: center;
   padding: 10px 10px;
   visibility
 `;
 const Input = styled.input`
   font-size: 10px;
+  margin: 0;
+  justify-content: space-between;
 `;
 export const Filter: FC<FilterProps> = ({
   setFilters,
@@ -99,7 +102,7 @@ export const Filter: FC<FilterProps> = ({
           <form>
             <h3>Filtered By:</h3>
             {categoryFilters.map(filter1 => (
-              <ul>
+              <nav>
                 <Input
                   key={filter1.id}
                   type="checkbox"
@@ -117,8 +120,8 @@ export const Filter: FC<FilterProps> = ({
                   }}
                   checked={filter1.select}
                 />
-                {filter1.category}
-              </ul>
+                 {filter1.category}
+              </nav>
             ))}
           </form>
           <Button type="submit" onClick={handleSubmit}>

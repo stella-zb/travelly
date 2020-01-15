@@ -57,8 +57,10 @@ export const Swipe: FC<SwipeProps> = ({
       },
       // withCredentials: true
       params: {
-        user: localStorage.userID
-      }
+        user: localStorage.userID,
+        key: Math.floor(Math.random() * Math.floor(10))
+      },
+      // cancelToken: source.token
     }).then(() => {
       console.log('post attraction')
       // history.push(`/explore/:${search.query}`);
