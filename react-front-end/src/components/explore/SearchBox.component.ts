@@ -38,3 +38,8 @@ export const Wrapper = styled.div`
   padding: 20px;
   width: 90%;
 `;
+
+export const Error = styled.div`
+  color: #F55D3E;
+  font-weight: bold;
+`

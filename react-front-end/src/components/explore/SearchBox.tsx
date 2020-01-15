@@ -3,7 +3,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Wrapper, DatePick, Button, Header } from "./SearchBox.component";
+import { Wrapper, DatePick, Button, Header, Error } from "./SearchBox.component";
 import { SearchForm } from "./SearchForm";
 import './SearchBox.css';
 
@@ -29,6 +29,8 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [itinerariesId, setItinerariesId] = useState<number | null>();
+
+  const [error, setError] = useState<String | null>('');
 
   handleInputChange = (e) => {
     const city = e.target.value
@@ -70,10 +72,10 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     console.log(tripStart);
     const dateVerified = Date.now() - 28800000;
     console.log(dateVerified)
-    if (tripStart <= dateVerified || tripEnd <= dateVerified || tripStart > tripEnd || !city) {
-      alert(` Either these conditions is not met:
-      - Date needs to be a future date
-      - City cannot be blank`);
+    if (!city) {
+      setError(`Destination cannot be blank`)
+    } else if (tripStart <= dateVerified || tripEnd <= dateVerified || tripStart > tripEnd) {
+      setError(`Please double check your date`);
     } else {
       tripStart = tripStart / 1000;
       tripEnd = tripEnd / 1000;
@@ -127,6 +129,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
               />
             </div>
           </DatePick>
+          <Error>{error}</Error>
           <Button type="button" onClick={handleSubmit}>Search</Button>
         </Fragment>
       </Wrapper>
