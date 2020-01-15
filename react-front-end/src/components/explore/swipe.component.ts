@@ -27,6 +27,7 @@ export const animation1 = keyframes`
 export const Container = styled.div`
   grid-template-rows: 10% 80% 10%;
   background: #E5F9FF;
+  height: calc(100vh + 10px);
 
 `;
 

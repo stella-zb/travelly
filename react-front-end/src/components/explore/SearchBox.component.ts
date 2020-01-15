@@ -27,6 +27,7 @@ export const Button = styled.button`
   padding: 15px;
   margin: 25px 0 0 0;
   font-size: 20px;
+  border-radius: 10px;
 `;
 
 export const Header = styled.h2`

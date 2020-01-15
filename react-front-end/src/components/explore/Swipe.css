@@ -23,6 +23,10 @@
   left: 10px;
 }
 
+.slider-wrapper .previousButton svg polygon {
+  fill: #FCFCFC;
+}
+
 .slider-wrapper .track {
   z-index: 999;
 }
@@ -32,4 +36,8 @@
   margin: 60% 5%;
   position: absolute;
   right: 10px;
+}
+
+.slider-wrapper .nextButton svg polygon {
+  fill: #FCFCFC;
 }
