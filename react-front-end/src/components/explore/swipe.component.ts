@@ -28,6 +28,7 @@ export const Container = styled.div`
   // display: grid;
   // grid-template-rows: 10% 75vh 10%;
   // margin-top: 10px;
+  background: #E5F9FF;
 `;
 
 export const TopBar = styled.div`
@@ -37,7 +38,7 @@ export const TopBar = styled.div`
 
 export const Attractions = styled.div`
   position: relative;
-  height: 75vh;
+  height: 70vh;
   weight: auto;
   // border: solid;
   margin: 10px 10px;
