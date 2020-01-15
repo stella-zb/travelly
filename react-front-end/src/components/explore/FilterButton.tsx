@@ -14,19 +14,16 @@ const Container = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
-  // background-color: rgba(0,0,0, 0.5);
 `;
 
 const Button = styled.button`
-  text-align: right;
-  margin: 20px 10px;
-  background-color: 
+  text-align: center;
   border: none;
   background: #F55D3E;
   height: 30px;
   border-radius: 15px;
+  padding: 10px 20px;
   text-transform: uppercase;
-  padding: 15px 10px;
   font-weight: 400;
   font-size: 10px;
   cursor: cursor;

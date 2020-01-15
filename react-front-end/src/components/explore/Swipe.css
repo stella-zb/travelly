@@ -5,6 +5,12 @@
 .slider-wrapper {
   /* display: grid; */
   display: flex;
+  position: relative;
+  height: 70vh;
+  width: 95vw;
+  /* border: solid; */
+  margin: 10px 10px;
+  overflow: hidden;
 }
 
 .slider-wrapper a {

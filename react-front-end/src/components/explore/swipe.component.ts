@@ -25,10 +25,9 @@ export const animation1 = keyframes`
 `;
 
 export const Container = styled.div`
-  // display: grid;
-  // grid-template-rows: 10% 75vh 10%;
-  // margin-top: 10px;
+  grid-template-rows: 10% 80% 10%;
   background: #E5F9FF;
+
 `;
 
 export const TopBar = styled.div`
@@ -37,71 +36,17 @@ export const TopBar = styled.div`
 `;
 
 export const Attractions = styled.div`
-  position: relative;
-  height: 70vh;
-  weight: auto;
-  // border: solid;
-  margin: 10px 10px;
-  overflow: hidden;
-  // &.slide::before {
-  //   content: "";
-  //   display: block;
-  //   position: absolute;
-  //   width: 100%;
-  //   // height: 100%;
-  //   background: -webkit-gradient(
-  //     linear,
-  //     left top,
-  //     left bottom,
-  //     from(transparent),
-  //     to(rgba(0, 0, 0, 0.9))
-  //   );
-  //   background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-  //   bottom: 0;
-  //   left: 0;
-  // }
-
-  // &.previousButton {
-  //   position: absolute;
-  //   top: 60%;
-  //   margin: 180px 10px;
-  //   transform: translateY(-50%);
-  //   z-index: 10;
-  //   background: url("http://svgshare.com/i/41_.svg") no-repeat center center /
-  //     16px;
-  //   width: 32px;
-  //   height: 32px;
-  //   text-indent: -9999px;
-  //   cursor: pointer;
-  // }
-  // &.nextButton {
-  //   position: absolute;
-  //   top: 50%;
-  //   margin: 180px 10px;
-  //   transform: translateY(-50%);
-  //   z-index: 10;
-  //   background: url("http://svgshare.com/i/41_.svg") no-repeat center center /
-  //     16px;
-  //   width: 32px;
-  //   height: 32px;
-  //   text-indent: -9999px;
-  //   cursor: pointer;
-  // }
-
-  // &.previousButton {
-  //   left: 0;
-  //   -webkit-transform: rotate(180deg) translateY(calc(50% + 0px));
-  //   transform: rotate(180deg) translateY(calc(50% + 0px));
-  // }
-
-  // &.nextButton {
-  //   right: 0;
-  // }
+  // position: relative;
+  // height: 70vh;
+  // weight: 80vw;
+  // // border: solid;
+  // margin: 10px 10px;
+  // overflow: hidden;
 `;
 export const SliderContent = styled.div`
   text-align: center;
   opacity: 1;
-  height: 500px;
+  height: 65vh;
   background-size: 100%;
 `;
 
@@ -163,23 +108,22 @@ export const Description = styled.p`
 `;
 
 export const City = styled.h2`
-  margin-left: 10px;
+  margin-left: 5vw;
   text-transform: uppercase;
+  font-size: 30px;
   text-align: left;
   display: center;
 `;
 
 export const NavButton = styled.button`
-  text-align: right;
-  margin: 20px 10px;
-  background-color: 
-  border: none;
-  width: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+  border: 0;
+  width: 60px;
   background: #F55D3E;
   height: 30px;
   border-radius: 15px;
   text-transform: uppercase;
-  padding: 15px 10px;
   font-weight: 400;
   font-size: 10px;
   cursor: cursor;                         
