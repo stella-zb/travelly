@@ -18,36 +18,36 @@ INSERT INTO itineraries (
 );
 
 INSERT INTO attractions (
-  name, review, latitude, longitude, photo, submitted_by
+  name, review, latitude, longitude, photo, submitted_by, visit_duration
 ) VALUES (
-  'Stanley Park', 3.4, 49.302488447038236, -123.14171791076662, 'https://images.dailyhive.com/20180412115108/shutterstock_155002466-1.jpg', 1
+  'Stanley Park', 3.4, 49.302488447038236, -123.14171791076662, 'https://images.dailyhive.com/20180412115108/shutterstock_155002466-1.jpg', 1, 3600
 ), (
-  'Coal Harbour', 4, 49.291304, -123.123276, 'https://img.marinas.com/v2/48bca557237a5b47c21a9b7f736a2b10f2992fd44997e2cabfc05aa2e14676bf.jpg', 1
+  'Coal Harbour', 4, 49.291304, -123.123276, 'https://img.marinas.com/v2/48bca557237a5b47c21a9b7f736a2b10f2992fd44997e2cabfc05aa2e14676bf.jpg', 1, 3600
 ), (
-  'Cypress', 4.3, 49.352945607771844, -123.17801846257264, 'https://biv.com/sites/default/files/styles/media_image/public/2018-03/cypressmountain.jpg', 1
+  'Cypress', 4.3, 49.352945607771844, -123.17801846257264, 'https://biv.com/sites/default/files/styles/media_image/public/2018-03/cypressmountain.jpg', 1, 3600
 ), (
-  'Third Beach', 3.5, 49.30338193650776, -123.1563403102008, 'https://live.staticflickr.com/6151/6187978554_45201526f5_4k.jpg', 2
+  'Third Beach', 3.5, 49.30338193650776, -123.1563403102008, 'https://live.staticflickr.com/6151/6187978554_45201526f5_4k.jpg', 2, 3600
 ), (
-  'False Creek Seawall', 4.0, 49.27273179887483, -123.13379848089629, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/False_Creek_Blue_Hour.jpg/1280px-False_Creek_Blue_Hour.jpg', 2
+  'False Creek Seawall', 4.0, 49.27273179887483, -123.13379848089629, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/False_Creek_Blue_Hour.jpg/1280px-False_Creek_Blue_Hour.jpg', 2, 3600
 ), (
-  'Earnest Ice Cream', 3.7, 49.26896525441082, -123.10261255924644, 'https://vancouverlookout.files.wordpress.com/2016/08/img_1296.jpg', 1
+  'Earnest Ice Cream', 3.7, 49.26896525441082, -123.10261255924644, 'https://vancouverlookout.files.wordpress.com/2016/08/img_1296.jpg', 1, 3600
 ), (
-  'David Lam Park', 4.2, 49.2724665529135, -123.12386556302295, 'https://media2.trover.com/T/5ba99858101f5e93460004ef/fixedw_large_4x.jpg', 1
-), ('Space Needle', 5, 47.620422, -122.349358, 'https://images.rove.me/w_740,q_85/to7gz9toaypxpewy5rox/seattle-space-needle.jpg', 1),
-('Central Park', 5, 40.785091, -73.968285, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/e169d0c6394f2e1f46eea3f653f2b7b4-central-park.jpg', 1),
-('Ellis Island', 5, 40.6997222, -74.0394444, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/10dde96588c6cddf880e59c2f99f1fdd-ellis-island.jpg', 1),
-('Metropolitan Museum of Art', 5, 40.778965, -73.962311, 'https://static01.nyt.com/images/2019/03/21/arts/21metcontemp-item1/2121metcontemp-item1-jumbo.jpg', 1),
-('Empire State Building', 5, 40.748817, -73.985428, 'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/71/33/e6.jpg', 1),
-('Brooklyn Bridge', 5, 40.70569, -73.99639, 'https://loving-newyork.com/wp-content/uploads/2016/07/Brooklyn-Bridge_170614090305011-1600x960.jpg', 1),
-('Statue of Liberty', 5, 40.689247, -74.044502, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1),
-('Coney Island', 5, 40.57788, -73.99403, 'https://lp-cms-production.imgix.net/features/2019/08/amusement-coney-island-shutterstockRF_332266760-08ffe08a73d3.jpg', 1),
-('Grand Central Terminal', 5, 40.752655, -73.977295, 'https://untappedcities-wpengine.netdna-ssl.com/wp-content/uploads/2013/03/Grand-Central-Terminal-Aerial-View-from-Glass-Walkways-NYC.jpg', 1),
-('American Museum of Natural History', 5, 40.7809345, -73.9737497, 'https://d21xlh2maitm24.cloudfront.net/nyc/natural-history-museum.jpg', 1),
-('Times Square', 5, 40.758896, -73.985130, 'https://ssl.tzoo-img.com/images/tzoo.hd.29653.4909.357159.TimesSquareHolidayInnExpress.jpg', 2),
-('Rockefeller Center', 5, 40.759487, -73.978356, 'https://media.timeout.com/images/104233902/1372/772/image.jpg', 2),
-('Guggenheim Museum', 5, 40.782980, -73.958971, 'https://d21xlh2maitm24.cloudfront.net/nyc/Guggenheim.jpg', 2),
-('St. Patrick’s Cathedral', 5, 40.758160, -73.975418, 'http://www.hpbmagazine.org/images/cache/cache_2/cache_0/cache_6/HPB_Fall2019_murphy_stpatricks_streetview2-af4c0602.jpeg', 2),
-('Chelsea Market', 5, 40.742352, -74.006210, 'https://img.theculturetrip.com/1024x574/smart/wp-content/uploads/2019/01/bycttb.jpg', 2)
+  'David Lam Park', 4.2, 49.2724665529135, -123.12386556302295, 'https://media2.trover.com/T/5ba99858101f5e93460004ef/fixedw_large_4x.jpg', 1, 3600
+), ('Space Needle', 5, 47.620422, -122.349358, 'https://images.rove.me/w_740,q_85/to7gz9toaypxpewy5rox/seattle-space-needle.jpg', 1, 3600),
+('Central Park', 5, 40.785091, -73.968285, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/e169d0c6394f2e1f46eea3f653f2b7b4-central-park.jpg', 1, 3600),
+('Ellis Island', 5, 40.6997222, -74.0394444, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/10dde96588c6cddf880e59c2f99f1fdd-ellis-island.jpg', 1, 3600),
+('Metropolitan Museum of Art', 5, 40.778965, -73.962311, 'https://static01.nyt.com/images/2019/03/21/arts/21metcontemp-item1/2121metcontemp-item1-jumbo.jpg', 1, 3600),
+('Empire State Building', 5, 40.748817, -73.985428, 'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/71/33/e6.jpg', 1, 3600),
+('Brooklyn Bridge', 5, 40.70569, -73.99639, 'https://loving-newyork.com/wp-content/uploads/2016/07/Brooklyn-Bridge_170614090305011-1600x960.jpg', 1, 3600),
+('Statue of Liberty', 5, 40.689247, -74.044502, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/21c6ef0ba96e0ce5107a91c4506e2df7-statue-of-liberty.jpg', 1, 3600),
+('Coney Island', 5, 40.57788, -73.99403, 'https://lp-cms-production.imgix.net/features/2019/08/amusement-coney-island-shutterstockRF_332266760-08ffe08a73d3.jpg', 1, 3600),
+('Grand Central Terminal', 5, 40.752655, -73.977295, 'https://untappedcities-wpengine.netdna-ssl.com/wp-content/uploads/2013/03/Grand-Central-Terminal-Aerial-View-from-Glass-Walkways-NYC.jpg', 1, 3600),
+('American Museum of Natural History', 5, 40.7809345, -73.9737497, 'https://d21xlh2maitm24.cloudfront.net/nyc/natural-history-museum.jpg', 1, 3600),
+('Times Square', 5, 40.758896, -73.985130, 'https://ssl.tzoo-img.com/images/tzoo.hd.29653.4909.357159.TimesSquareHolidayInnExpress.jpg', 2, 3600),
+('Rockefeller Center', 5, 40.759487, -73.978356, 'https://media.timeout.com/images/104233902/1372/772/image.jpg', 2, 3600),
+('Guggenheim Museum', 5, 40.782980, -73.958971, 'https://d21xlh2maitm24.cloudfront.net/nyc/Guggenheim.jpg', 2, 3600),
+('St. Patrick’s Cathedral', 5, 40.758160, -73.975418, 'http://www.hpbmagazine.org/images/cache/cache_2/cache_0/cache_6/HPB_Fall2019_murphy_stpatricks_streetview2-af4c0602.jpeg', 2, 3600),
+('Chelsea Market', 5, 40.742352, -74.006210, 'https://img.theculturetrip.com/1024x574/smart/wp-content/uploads/2019/01/bycttb.jpg', 2, 3600)
 ;
 
 INSERT INTO timeslots (
