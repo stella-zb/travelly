@@ -134,19 +134,19 @@ module.exports = db => {
           console.log("First api successfully");
           addFSData(res1.data.response.groups[0].items, attractionList);
 
-          return Promise.all(
-            attractionList.map(attraction => {
-              return axios.get(
-                `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`
-              );
-            })
-          ).then(results => {
-            attractionList.map((attraction, index) => {
-              attraction.photo =
-                results[index].data.response.photos.items[0].prefix +
-                "500x500" +
-                results[index].data.response.photos.items[0].suffix;
-            });
+          // return Promise.all(
+          //   attractionList.map(attraction => {
+          //     return axios.get(
+          //       `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`
+          //     );
+          //   })
+          // ).then(results => {
+          //   attractionList.map((attraction, index) => {
+          //     attraction.photo =
+          //       results[index].data.response.photos.items[0].prefix +
+          //       "500x500" +
+          //       results[index].data.response.photos.items[0].suffix;
+          //   });
           for (let trail of res2.data.trails) {
             if (trail.imgMedium !== "") {
               attractionList.push({
@@ -165,7 +165,7 @@ module.exports = db => {
               });
             }
           }
-          });
+          // });
 
           // for (let event of results[2].data._embedded.events) {
           //   const test = moment.utc(event.dates.start.dateTime).format();
