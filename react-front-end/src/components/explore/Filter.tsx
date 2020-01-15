@@ -25,16 +25,17 @@ const Button = styled.button`
   cursor: cursor;
 `;
 const FilterTab = styled.div`
-  display: block;
+  display: grid;
   height: 400px;
   width: 330px;
-  z-index:999;
-  background-color: #FCFCFC;
+  z-index:9999;
+  background-color: #878E88;
   border-radius: 15px;
-  color: #F55D3E;
+  color: #00000;
   opacity: 1;
   position: absolute;
-  margin: 25% 30px;
+  margin: 25% 10px;
+  margin-left: 10px;
   justify-content: center;
   align-items: center;
   padding: 10px 10px;

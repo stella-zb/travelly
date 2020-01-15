@@ -1,0 +1,29 @@
+
+.slider-content {
+  z-index: 1;
+}
+.slider-wrapper {
+  /* display: grid; */
+  display: flex;
+}
+
+.slider-wrapper a {
+  z-index: 9997;
+}
+.slider-wrapper .previousButton {
+  z-index: 9997;
+  margin: 60% 5%;
+  position: absolute;
+  left: 10px;
+}
+
+.slider-wrapper .track {
+  z-index: 999;
+}
+
+.slider-wrapper .nextButton {
+  z-index: 9997;
+  margin: 60% 5%;
+  position: absolute;
+  right: 10px;
+}

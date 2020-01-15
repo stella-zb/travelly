@@ -12,7 +12,9 @@ import {
   Description
 } from "./swipe.component";
 
-import "react-animated-slider/build/horizontal.css";
+import './Swipe.css';
+
+// import "react-animated-slider/build/horizontal.css";
 
 interface SwipeProps {
   attractions: Array<any>;
