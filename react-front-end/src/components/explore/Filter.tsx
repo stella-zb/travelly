@@ -25,24 +25,23 @@ const Button = styled.button`
   cursor: cursor;
 `;
 const FilterTab = styled.div`
-  display: grid;
-  height: 400px;
-  width: 330px;
+  display: flex;
+  height: 60vh;
+  width: 85vw;
   z-index:9999;
   background-color: #878E88;
   border-radius: 15px;
   color: #00000;
   opacity: 1;
   position: absolute;
-  margin: 25% 10px;
-  margin-left: 10px;
+  margin: 25% auto;
+  margin-left: 5vw
   justify-content: center;
   align-items: center;
   padding: 10px 10px;
   visibility
 `;
 const Input = styled.input`
-  // display: flex;
   font-size: 10px;
 `;
 export const Filter: FC<FilterProps> = ({

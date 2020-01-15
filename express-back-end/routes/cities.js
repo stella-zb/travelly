@@ -185,7 +185,7 @@ module.exports = db => {
           // }
         })
         .then(() => {
-          console.log("List of Attractions", attractionList);
+          // console.log("List of Attractions", attractionList);
           res.json([attractionList, city]);
         })
         .catch(err => {

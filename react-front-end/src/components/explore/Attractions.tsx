@@ -72,7 +72,7 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
         <Filter attractions={attractions} setFilters={setFilters}/>
       </TopBar>
       <Attractions>
-        <Swipe attractions={attractions} itinerariesId={itinerariesId}/>
+        <Swipe key={itinerariesId} attractions={attractions} itinerariesId={itinerariesId}/>
       </Attractions>
       <Link to={`/trips/${itinerariesId}`}> <NavButton>Go</NavButton></Link>
     </Container>
