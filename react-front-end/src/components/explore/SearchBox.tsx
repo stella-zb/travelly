@@ -10,20 +10,20 @@ import './SearchBox.css';
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  selected?: string | null,
-  date?: Date | null,
-  city?: string | null
-};
+  selected?: string | null;
+  date?: Date | null;
+  city?: string | null;
+}
 
 interface SearchObj {
-  query: string | number | string[] | undefined,
-  results: Array<any>
-};
+  query: string | number | string[] | undefined;
+  results: Array<any>;
+}
 
 export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
 
   //user city input
-  const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
+  const [search, setSearch] = useState<SearchObj>({ query: "", results: [] });
 
   //user date input
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -53,23 +53,22 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
   };
 
   handleSubmit = () => {
-    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.defaults.baseURL = "http://localhost:8081";
     const city = search.query;
-
 
     //convert to UTC timezone - UNIX
 
     let convertStart = startDate.toString().slice(4, 15);
     let convertEnd = endDate.toString().slice(4, 15);
     const timezoneStart = "00:00:00 GMT";
-    const timezoneEnd = "11:59:59 GMT"
-    convertStart = convertStart.concat(' ', timezoneStart);
-    convertEnd = convertEnd.concat(' ', timezoneEnd);
+    const timezoneEnd = "11:59:59 GMT";
+    convertStart = convertStart.concat(" ", timezoneStart);
+    convertEnd = convertEnd.concat(" ", timezoneEnd);
     let tripStart = Date.parse(convertStart);
     let tripEnd = Date.parse(convertEnd);
 
     //valid date and city check
-    console.log(tripStart);
+
     const dateVerified = Date.now() - 28800000;
     console.log(dateVerified)
     if (!city) {
@@ -97,7 +96,6 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
           setItinerariesId(res[0].data);
         })
     }
-
   };
 
   return (
