@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
@@ -40,8 +40,11 @@ const Button = styled.button`
   margin: 20px;
   padding: 10px 40px
   border: none;
-  background-color: white;
-  border-bottom: 2px solid #00C3AB;
+  background-color: #FCFCFC;
+
+  &:hover {
+    border-bottom: 2px solid #76BED0;
+  }
 `;
 
 export default function App() {
@@ -84,54 +87,56 @@ export default function App() {
     // INITIALIZE
   );
 
-  const [user, setUser] = useState<boolean>(false);
+  const [user, setUser] = useState<number>(localStorage.userID);
 
 
 
-  console.log(localStorage.userID)
   return (
+    <div className="App">
     <Router>
 
       {user &&
         <NavDiv>
           <NavList>
-            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
-            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
-            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
+            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Explore</NavItem></li>
+            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>My Trips</NavItem></li>
+            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Profile</NavItem></li>
           </NavList>
         </NavDiv>}
 
       <Switch>
         {!user ? <>
-        <Route path='/'>
-          <Wrapper>
-            <Button onClick={() => transition(LOGIN)}>Login In</Button>
-            <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
-          </Wrapper>
-          {mode === LOGIN && <LoginInForm setLogin={() => setUser(true)} />}
-          {mode === SIGNUP && <SignUpForm />}
+          <Route path='/'>
+            <Wrapper>
+              <Button onClick={() => transition(LOGIN)}>Log In</Button>
+              <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
+            </Wrapper>
+            {mode === LOGIN && <LoginInForm setLogin={() => setUser(localStorage.userID)} />}
+            {mode === SIGNUP && <SignUpForm setLogin={() => setUser(localStorage.userID)} />}
 
           </Route>
         </>
           :
           <>
-          <Route path='/explore'>
-            <Explore
-              cityName='Van'
-              topRecommended="Vancouver"
-            // selected=''
-            />
-          </Route>
-          <Route path='/trips'>
-            <TripsIndex />
-          </Route>
+            <Redirect from="/" to="/explore" />
+            <Route path='/explore'>
+              <Explore
+                cityName='Van'
+                topRecommended="Vancouver"
+              // selected=''
+              />
+            </Route>
+            <Route path='/trips'>
+              <TripsIndex />
+            </Route>
 
-          <Route path='/profile'>
-            <Profile setLogout={() => setUser(false)} />
-          </Route>
+            <Route path='/profile'>
+              <Profile setLogout={() => setUser(null)} />
+            </Route>
           </>}
       </Switch>
-    </Router>
+      </Router>
+      </div>
   )
 }
 

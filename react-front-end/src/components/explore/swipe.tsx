@@ -1,126 +1,114 @@
-import React, { useState, FC, Fragment, useEffect, useCallback } from 'react';
-import Slider from 'react-animated-slider';
-import axios from 'axios';
+import React, { useState, FC } from "react";
+import Slider from "react-animated-slider";
+import axios from "axios";
 
-import { Filter } from "./Filter";
-
-import { 
+import {
   Container,
-  TopBar,
   Attractions,
   SliderContent,
   Inner,
   Name,
   Button,
-  Description,
-  City
+  Description
 } from "./swipe.component";
 
-import "react-animated-slider/build/horizontal.css";
+import './Swipe.css';
 
+// import "react-animated-slider/build/horizontal.css";
 
 interface SwipeProps {
-  // style?: React.CSSProperties | undefined
-  handleSubmit?: (e: AttractionsObject) => void,
-  itinerariesId: number
-  
-};
+  attractions: Array<any>;
+  handleSubmit?: (e: AttractionsObject) => void;
+  itinerariesId: number;
+}
 
 interface AttractionsObject {
-  id: string,
-  name: string,
-  description: string,
-  review: number | null,
-  lat: number,
-  long: number,
-  open_time: number | null,
-  close_time: number | null,
-  visit_duration: number | null,
-  photo: string
-  location: string,
-};
+  id: string;
+  name: string;
+  description: string;
+  review: number | null;
+  lat: number;
+  long: number;
+  open_time: number | null;
+  close_time: number | null;
+  visit_duration: number | null;
+  photo: string;
+  location: string;
+}
 
-export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
-  const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
-  const [city, setCity] = useState<string>('');
-  let value: string | null;
-  useEffect(() => {
-    axios.defaults.baseURL = 'http://localhost:8081';
-    axios.get(`/api/itineraries/${itinerariesId}`, {
-      params : {
-        itinerariesId
-      }
-    })
-    .then(res => {
-      console.log(res);
-      setAttractions(res.data[0]);
-      setCity(res.data[1]);
-    })
-    .catch((err) => console.log(err));
-  },[])
+export const Swipe: FC<SwipeProps> = ({
+  attractions,
+  handleSubmit,
+  itinerariesId
+}) => {
+  //setfilter object
 
-  //helper functions
-  //to shuffle all attractions in a random way
+  handleSubmit = (item: AttractionsObject) => {
+    console.log("check");
 
-  function shuffleAttractions(array: Array<any>) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i - 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-
-  const attractionsShuffle = shuffleAttractions(attractions)
-  
-  //submit the attractions to database
-
-  handleSubmit = (item: AttractionsObject ) => {
-    console.log('check');
-    axios.defaults.baseURL = 'http://localhost:8081';
+    
+    axios.defaults.baseURL = "http://localhost:8081";
     axios(`/api/itineraries/${itinerariesId}`, {
       method: "post",
       data: {
-        attraction: item,
+        attraction: item
       },
       // withCredentials: true
       params: {
-        user: localStorage.userID
-      }
-    })
-    .then(() => {
+        user: localStorage.userID,
+      },
+    }).then(() => {
+      console.log('post attraction')
       // history.push(`/explore/:${search.query}`);
     })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
     <Container>
-      <TopBar>
-        <City>{city}</City>
-        <Filter attractions={attractionsShuffle}/>
-      </TopBar>
       <Attractions>
-        <Slider className="slider-wrapper">
-            {attractionsShuffle.map((item, index) => (
-              <form onSubmit={(e) => {
+        <Slider
+          className="slider-wrapper"
+          style={{ display: "flex !important", zIndex: 90 }}
+        >
+          {attractions.map((item, index) => (
+            <form
+              key={index}
+              onSubmit={e => {
                 e.preventDefault();
-                handleSubmit(item)
-              }
-              }>
-                <SliderContent
-                  key={index}
-                  className="slider-content"
-                  style={{ background: `url('${item.photo}') no-repeat center center` }}
-                >
-                  <Inner className="inner">
-                    <Name>{item.name}</Name>
-                    <Description>{item.location}</Description>
-                    <Button type="submit" value={item}>Select</Button>
-                  </Inner>
-                </SliderContent>
-              </form>
-            ))}
-      </Slider>
-    </Attractions>
+                handleSubmit(item);
+              }}
+            >
+              <SliderContent
+                key={index}
+                className="slider-content"
+                style={{
+                  background: `linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.65)
+                  ), url('${item.photo}') no-repeat center center`,
+                  borderRadius: "15px",
+                  border: "solid",
+                  backgroundSize: "cover",
+                  borderColor: "#FCFCFC",
+                  borderWidth: "2px",
+                  color: "#FCFCFC"
+
+                }}
+              >
+                <Inner className="inner">
+                  <Name>{item.name}</Name>
+                  <Description>{item.location}</Description>
+                  <Button type="submit" value={item}>Select</Button>
+                </Inner>
+              </SliderContent>
+            </form>
+          ))}
+        </Slider>
+      </Attractions>
     </Container>
   );
 };

@@ -1,27 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ItineraryDay = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  text-transform: uppercase;
-`
 
 type PropTypes = { number:string, selectDay:any, key:number, id:string, selected:string }
 
-export const Day = ({number, selectDay, selected}: PropTypes) => {
+export const Day = ({ number, selectDay, selected }: PropTypes) => {
+  const ItineraryDay = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+  `
   const DayNum = styled.div`
-    background: ${selected === number ? '#586F7C' : '#FFF'}
+    background: ${selected === number ? '#76BED0' : 'inherit'}
     border-radius: 50%;
     height: 25px;
     width: 25px;
     line-height: 25px;
     color: ${selected === number ? '#FFF' : 'inherit'};
+    margin-top: 4px;
   `
+  const DayText = styled.div`
+    font-size: 13px;
+    font-weight: ${selected === number && 'bold'};
+    margin-bottom: 4px;
+  `
+
   return (
     <ItineraryDay onClick={selectDay}>
-      <div>Day</div>
+      <DayText>Day</DayText>
       <DayNum>{number}</DayNum>
     </ItineraryDay>
   )

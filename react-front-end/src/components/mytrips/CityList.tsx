@@ -16,6 +16,11 @@ const Title = styled.h1`
   text-align: center;  
 `
 
+const Body = styled.div`
+  width: 95%;
+  margin: 0 auto;
+`
+
 export const CityList = () => {
   const [trips, setTrips] = useState<Array<any>>([]);
   useEffect(() => {
@@ -29,11 +34,13 @@ export const CityList = () => {
     <>
     <Title>My Trips</Title>
 
+    <Body>
     {trips ? trips.map(city =>
       <CityItem key={city.id} to={`/trips/${city.id}`}>
-        <City key={city.id} name={city.city} img={city.city_img} start={moment.unix(city.trip_start).format('MMM DD, YYYY')} end={moment.unix(city.trip_end).format('MMM DD, YYYY')} />
+        <City key={city.id} name={city.city} img={city.city_img} start={moment.unix(city.trip_start).utc().format('MMM DD, YYYY')} end={moment.unix(city.trip_end).utc().format('MMM DD, YYYY')} />
       </CityItem>
-      ):<div>Loading</div>}
+        ) : <div>Loading</div>}
+    </Body>
     </>
   )
 }

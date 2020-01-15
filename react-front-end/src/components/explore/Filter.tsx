@@ -1,89 +1,136 @@
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useState, useEffect } from "react";
 import styled from "styled-components";
+
+import { FilterButton } from "./FilterButton";
 
 interface FilterProps {
   attractions: Array<any>;
-  handleFilter?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // checked?: boolean;
-};
+  handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  setFilters: any;
+}
 const Button = styled.button`
-  text-align: right;
-  margin: 20px 10px;
-  background-color: 
-  border: solid;
-  background: #FFD800;
+  text-align: center;
+  // margin: 20px 10px;
+  border: 0;
+  background: #F55D3E;
   height: 30px;
+  width: 120px;
   border-radius: 15px;
   text-transform: uppercase;
-  padding: 15px 10px;
+  padding: 10px 20px;
   font-weight: 400;
   font-size: 10px;
   cursor: cursor;
 `;
 const FilterTab = styled.div`
-  display: grid;
+  display: block;
+  height: 40vh;
+  width: 85vw;
+  z-index:9999;
+  background-color: #fcfcfc;
+  border-radius: 15px;
+  color: #00000;
+  opacity: 1;
+  position: absolute;
+  margin: 30% auto;
+  margin-left: 5vw
+  text-align: left;
+  // justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  visibility
 `;
 const Input = styled.input`
+  font-size: 10px;
+  margin: 0;
+  justify-content: space-between;
 `;
-export const Filter: FC<FilterProps> = ({ attractions, handleFilter }) => {
-  
-  // const filters = ["SCENERY", "SHOPPING", "RESTAURANTS/COFFEE SHOPS", "TRAILS", "MUSEUM"];
-  const [filter, setFilter] = useState<Array<any>>([]);
-  const [checked, setChecked] = useState<Boolean>(false);
+export const Filter: FC<FilterProps> = ({
+  setFilters,
+  handleSubmit,
+  handleToggle
+}) => {
+  const [categoryFilters, setCategoryfilters] = useState<Array<any>>([]);
+  const [show, setShow] = useState<Boolean>(false);
 
-  handleFilter = (e) => {
-    // const item = e.target.name;
-    // const isChecked = e.target.checked;
+  useEffect(() => {
+    let categoryFilters = [
+      { id: 1, category: "SCENERY" },
+      { id: 2, category: "SHOPPING" },
+      { id: 3, category: "RESTAURANTS/COFFEE SHOPS" },
+      { id: 4, category: "TRAILS" },
+      { id: 5, category: "MUSEUM" }
+    ];
 
-    // setFilter(item)
-    console.log(filter);
-  }
-  
+    setCategoryfilters(
+      categoryFilters.map(filter => {
+        return {
+          select: false,
+          id: filter.id,
+          category: filter.category
+        };
+      })
+    );
+  }, []);
+
+  // console.log(categoryFilters);
+
+  handleSubmit = e => {
+    // e.preventDefault();
+    let selectedFilters: Array<any>;
+    selectedFilters = [];
+    categoryFilters.map(filter => {
+      if (filter.select === true) {
+        selectedFilters.push(filter.category);
+      }
+      return selectedFilters;
+    });
+
+    setFilters(selectedFilters);
+    setShow(false);
+  };
+
   return (
     <Fragment>
-      <Button>Filter</Button>
-      <FilterTab>
-          {/* {filters.map(filter => {
-            <ul>
-            <Input
-              type="checkbox"
-              name={`${filter}`}
-              onClick={handleFilter}
-            />{filter}
-            </ul>
-          })} */}
-        {/* <Input
-          type="checkbox"
-          name="SCENERY"
-          checked={setChecked}
-          onChange={handleFilter}
-          />Scenery
-        <Input
-          type="checkbox"
-          name="SHOPPING"
-          checked={checked}
-          onChange={handleFilter}
-          />Shopping
-        <Input
-          type="checkbox"
-          name="RESTAURANTS/COFFEE SHOPS"
-          checked={checked}
-          onChange={handleFilter}
-          />Restaurants/Coffee Shops
-        <Input
-          type="checkbox"
-          name="TRAILS"
-          checked={checked}
-          onChange={handleFilter}
-          />Trails
-        <Input
-          type="checkbox"
-          name="MUSEUM"
-          checked={checked}
-          onChange={handleFilter}
-          />Museums  */}
-      </FilterTab>
+      <FilterButton setShow={setShow} onClick={handleToggle}>
+        Filter
+      </FilterButton>
+      {show ? (
+        <FilterTab>
+          <form>
+            <h3>Filtered By:</h3>
+            {categoryFilters.map(filter1 => (
+              <nav>
+                <Input
+                  key={filter1.id}
+                  type="checkbox"
+                  name={`${filter1}`}
+                  onChange={e => {
+                    let checked = e.target.checked;
+                    setCategoryfilters(
+                      categoryFilters.map(filter2 => {
+                        if (filter2.id === filter1.id) {
+                          filter2.select = checked;
+                        }
+                        return filter2;
+                      })
+                    );
+                  }}
+                  checked={filter1.select}
+                />
+                 {filter1.category}
+              </nav>
+            ))}
+          </form>
+          <Button type="submit" onClick={handleSubmit}>
+            Set Filter
+          </Button>
+        </FilterTab>
+      ) : (
+        <></>
+      )}
     </Fragment>
   );
 };
