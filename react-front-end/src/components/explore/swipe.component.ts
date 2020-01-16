@@ -89,7 +89,7 @@ export const Button = styled.button`
   padding: 15px 30px;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;
+  cursor: pointer;
   &:hover {
     color: #ffffff;
     background: #222222;
@@ -127,7 +127,9 @@ export const NavButton = styled.button`
   text-transform: uppercase;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;
+  &:hover {
+    cursor: pointer;
+  }
   position: relative;
   bottom: 240px;                     
 `;
