@@ -77,8 +77,10 @@ export const Trip = () => {
   }, [])
 
   return (
+    loading ?
+    <Modal><img src={spinner} /><br />Loading...</Modal>
+    :
     <>
-      {loading && <Modal><img src={spinner} /><br />Loading...</Modal>}
       {invite ? <Invite trip={id} goBack={() => setInvite(false)} /> : checkItineraryExists(timeslots)}
     </>
   )
