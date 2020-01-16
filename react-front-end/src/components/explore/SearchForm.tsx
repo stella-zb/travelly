@@ -24,7 +24,7 @@ export const SearchForm = ({ handleInputChange, search, setSearch }: any) => {
 
   return (
     <div className="SearchBar" ref={wrapperRef}>
-      <form>
+      <form style={{background: '#fff'}}>
         <Input
           type="text"
           id="search-input"

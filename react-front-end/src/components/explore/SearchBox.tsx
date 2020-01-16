@@ -13,12 +13,12 @@ interface SearchProps {
   selected?: string | null;
   date?: Date | null;
   city?: string | null;
-}
+};
 
 interface SearchObj {
   query: string | number | string[] | undefined;
   results: Array<any>;
-}
+};
 
 export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
 

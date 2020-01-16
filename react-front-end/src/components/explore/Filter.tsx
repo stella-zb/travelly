@@ -22,7 +22,7 @@ const Button = styled.button`
   padding: 10px 20px;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;
+  cursor: pointer;
 `;
 const FilterTab = styled.div`
   display: block;

@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   height: 40px;
-  width: 98%;
+  width: 100%;
   color: black;
   text-align: center;
   font-size: 16px;
+  border: 0;
 `;
 
 export const Suggestion = styled.div`
@@ -43,4 +44,4 @@ export const Wrapper = styled.div`
 export const Error = styled.div`
   color: #F55D3E;
   font-weight: bold;
-`
+`;
