@@ -6,6 +6,9 @@ const ActionIcon = styled.img`
   width: 35px;
   margin-right: 5px;
   margin-left: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `
 type PropTypes = {id:string, setInvite:any}
 export const InviteIcon = ({id, setInvite}:PropTypes) => {

@@ -25,6 +25,9 @@ const AddAttr = styled.img`
   width: 32px;
   position: relative;
   top: -2px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Actions = styled.div`
