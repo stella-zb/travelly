@@ -31,6 +31,9 @@ const DeleteButton = styled.button`
   border-radius: 7px;
   font-size: 12px;
   font-weight: 600;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Submitter = styled.div`
