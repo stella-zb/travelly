@@ -44,4 +44,4 @@ export const Wrapper = styled.div`
 export const Error = styled.div`
   color: #F55D3E;
   font-weight: bold;
-`
+`;
