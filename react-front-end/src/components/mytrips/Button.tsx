@@ -11,7 +11,7 @@ const Btn = styled.div`
   border-radius: 50%;
   height: 80px;
   width: 80px;
-  z-index: 999;
+  z-index: 998;
   position: fixed;
   bottom: 70px;
   right: 20px;

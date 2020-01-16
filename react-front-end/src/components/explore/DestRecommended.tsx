@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from 'styled-components';
-
+import {DestinationRec} from './Destination';
 
 type DestRecProps = { 
   cityName: string,
@@ -10,26 +10,31 @@ type DestRecProps = {
   // children: ReactNode
 };
 
-const Destination = styled.h3`
-  display: block;
+const Destination = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  // color: #ffffff;
-`;
-const Image = styled.img`
+  justify-content: center;
   width: 90%;
-  height: 150px;
-  background-size: 100%;
-  border-radius: 15px;
-  display: grid;
-  margin: 0px auto;
 `;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+
 export const DestRec: React.FC<DestRecProps> = () => {  
     return (
-      <Fragment>
-        <Destination>Vancouver<Image src="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg"/></Destination>
-        <Destination>Tokyo<Image src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/></Destination>
-        <Destination>Seattle<Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg"/></Destination>
-        <Destination>London<Image src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/></Destination>
-      </Fragment>
+      <>
+      <Container>
+        <Destination><h3>Vancouver</h3><DestinationRec url='http://www.destination360.com/north-america/canada/vancouver/images/s/vancouver-bc.jpg' /></Destination>
+        <Destination><h3>Tokyo</h3><DestinationRec url='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80' /></Destination>
+      </Container>
+      <Container>
+        <Destination><h3>Seattle</h3><DestinationRec url='https://www.citizenm.com/cache/images/seattle_city_image_1200x675-1_004b02a34b02a3.jpg' /></Destination>
+        <Destination><h3>London</h3><DestinationRec url='https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80' /></Destination>
+      </Container>
+      </>
     )
 }

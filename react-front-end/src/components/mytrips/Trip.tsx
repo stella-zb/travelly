@@ -4,6 +4,15 @@ import { AttractionList } from './AttractionList';
 import { Itinerary } from './Itinerary';
 import { Redirect } from 'react-router';
 import { Invite } from './Invite';
+import styled from 'styled-components';
+import spinner from '../../images/spinner.svg';
+
+const Modal = styled.div`
+    background: #FCFCFC;
+    z-index: 9999999;
+    height: 100vh;
+    width: 100vw;
+  `
 
 export const Trip = () => {
   const id: string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
@@ -11,6 +20,7 @@ export const Trip = () => {
   const [count, setCount] = useState(1);
   const [invite, setInvite] = useState<boolean>(false);
   const firstUpdate = useRef(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (firstUpdate.current) {
@@ -55,8 +65,10 @@ export const Trip = () => {
   }
 
   const generate = (e: any) => {
+    setLoading(true)
     axios.post(`/api/trips/${id}`)
       .then(() => loadData())
+      .then(() => setLoading(false))
       .catch(err => console.log(err))
   }
 
@@ -66,6 +78,7 @@ export const Trip = () => {
 
   return (
     <>
+      {loading && <Modal><img src={spinner} /><br />Loading...</Modal>}
       {invite ? <Invite trip={id} goBack={() => setInvite(false)} /> : checkItineraryExists(timeslots)}
     </>
   )
