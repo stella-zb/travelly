@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Filter } from "./Filter";
 import { Swipe } from "./swipe"
 import { shuffleAttractions, getAttractions, applyFilter} from "../../helpers/attractionsSorting";
+import spinner from '../../images/spinner.svg';
+import styled from 'styled-components';
 
 import { 
   Container,
@@ -16,6 +18,12 @@ import {
 
 import "react-animated-slider/build/horizontal.css";
 
+const Modal = styled.div`
+    background: #FCFCFC;
+    z-index: 9999999;
+    height: 100vh;
+    width: 100vw;
+  `;
 
 interface SwipeProps {
   // style?: React.CSSProperties | undefined
@@ -42,6 +50,7 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
   const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
   const [city, setCity] = useState<string>('');
   const [filters, setFilters] = useState<Array<string>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   let attractionObject:any = {};
 
@@ -56,17 +65,18 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
       setCity(res.data[1]);
       const shuffledAttractions = shuffleAttractions(res.data[0]);
       setAttractions(shuffleAttractions)
-
       const attractionsObject = getAttractions(attractionObject, shuffledAttractions);
       const result = applyFilter(attractionsObject, filters)
       setAttractions(result);
       getAttractions(attractionObject, attractions);
+      setLoading(false);
     })
     .catch((err) => console.log(err));
   },[filters]);
   
   return (
     <Container>
+      {loading && <Modal><img src={spinner} /><br />Loading...</Modal>}
       <TopBar>
         <City>{city}</City>
         <Filter attractions={attractions} setFilters={setFilters}/>
