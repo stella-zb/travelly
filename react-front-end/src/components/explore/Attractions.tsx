@@ -75,8 +75,10 @@ export const AttractionList: FC<SwipeProps> = ({ itinerariesId }) => {
   },[filters]);
   
   return (
+    loading  ?
+    <Modal><img src={spinner} /><br />Loading...</Modal>
+    :
     <Container>
-      {loading && <Modal><img src={spinner} /><br />Loading...</Modal>}
       <TopBar>
         <City>{city}</City>
         <Filter attractions={attractions} setFilters={setFilters}/>
