@@ -219,12 +219,8 @@ module.exports = db => {
       `,
       [name]
     ).then(query => {
-      console.log(query.rows[0]);
       const itinerary = query.rows[0];
-      console.log('1id',itinerary)
-      console.log('2id',itinerariesId)
       if (!itinerary || (itinerary && itinerary.itinerary_id != itinerariesId)) {
-        console.log('check')
         db.query(
           `INSERT INTO attractions (
               name,
