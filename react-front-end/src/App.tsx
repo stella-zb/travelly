@@ -7,6 +7,7 @@ import useVisualMode from "./hooks/useVisualMode";
 import { LoginInForm } from './components/auth/LoginInForm';
 import { SignUpForm } from './components/auth/SignUpForm';
 import { Profile } from './components/profile/profile';
+import logo from "./images/logo.png";
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -93,50 +94,50 @@ export default function App() {
 
   return (
     <div className="App">
-    <Router>
+      <Router>
 
-      {user &&
-        <NavDiv>
-          <NavList>
-            <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Explore</NavItem></li>
-            <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>My Trips</NavItem></li>
-            <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Profile</NavItem></li>
-          </NavList>
-        </NavDiv>}
+        {user &&
+          <NavDiv>
+            <NavList>
+              <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Explore</NavItem></li>
+              <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>My Trips</NavItem></li>
+              <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold', color: '#F55D3E' }}>Profile</NavItem></li>
+            </NavList>
+          </NavDiv>}
 
-      <Switch>
-        {!user ? <>
-          <Route path='/'>
-            <Wrapper>
-              <Button onClick={() => transition(LOGIN)}>Log In</Button>
-              <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
-            </Wrapper>
-            {mode === LOGIN && <LoginInForm setLogin={() => setUser(localStorage.userID)} />}
-            {mode === SIGNUP && <SignUpForm setLogin={() => setUser(localStorage.userID)} />}
-
-          </Route>
-        </>
-          :
-          <>
-            <Redirect from="/" to="/explore" />
-            <Route path='/explore'>
-              <Explore
-                cityName='Van'
-                topRecommended="Vancouver"
-              // selected=''
-              />
+        <Switch>
+          {!user ? <>
+            <Route path='/'>
+              <Wrapper>
+                <Button onClick={() => transition(LOGIN)}>Log In</Button>
+                <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
+              </Wrapper>
+              {mode === LOGIN && <LoginInForm setLogin={() => setUser(localStorage.userID)} />}
+              {mode === SIGNUP && <SignUpForm setLogin={() => setUser(localStorage.userID)} />}
+              <img src={logo} style={{ width: '250px', position: 'relative', top: '40vh' }} />
             </Route>
-            <Route path='/trips'>
-              <TripsIndex />
-            </Route>
+          </>
+            :
+            <>
+              <Redirect from="/" to="/explore" />
+              <Route path='/explore'>
+                <Explore
+                  cityName='Van'
+                  topRecommended="Vancouver"
+                // selected=''
+                />
+              </Route>
+              <Route path='/trips'>
+                <TripsIndex />
+              </Route>
 
-            <Route path='/profile'>
-              <Profile setLogout={() => setUser(null)} />
-            </Route>
-          </>}
-      </Switch>
+              <Route path='/profile'>
+                <Profile setLogout={() => setUser(null)} />
+              </Route>
+            </>}
+        </Switch>
       </Router>
-      </div>
+    </div>
   )
 }
 
