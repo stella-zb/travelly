@@ -26,7 +26,9 @@ const Button = styled.button`
   text-transform: uppercase;
   font-weight: 400;
   font-size: 10px;
-  cursor: cursor;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const FilterButton: FC<FilterProps> = ({ handleToggle, setShow }) => {
   const [active, setActive] = useState<Boolean>(false);

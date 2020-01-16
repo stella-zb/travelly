@@ -16,12 +16,15 @@
 .slider-wrapper a {
   z-index: 9997;
 }
+
 .slider-wrapper .previousButton {
   z-index: 9997;
-  margin: 60% 5%;
   position: absolute;
   left: 10px;
+  margin: 0;
+  padding-top: 300px;
 }
+
 
 .slider-wrapper .previousButton svg polygon {
   fill: #FCFCFC;
@@ -33,9 +36,10 @@
 
 .slider-wrapper .nextButton {
   z-index: 9997;
-  margin: 60% 5%;
   position: absolute;
   right: 10px;
+  margin: 0;
+  padding-top: 300px;
 }
 
 .slider-wrapper .nextButton svg polygon {
