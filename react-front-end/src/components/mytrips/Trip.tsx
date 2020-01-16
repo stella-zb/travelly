@@ -12,7 +12,7 @@ const Modal = styled.div`
     z-index: 9999999;
     height: 100vh;
     width: 100vw;
-  `
+  `;
 
 export const Trip = () => {
   const id: string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
