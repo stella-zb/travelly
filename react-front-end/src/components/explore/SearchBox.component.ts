@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   height: 40px;
-  width: 98%;
+  width: 100%;
   color: black;
   text-align: center;
   font-size: 16px;
+  border: 0;
 `;
 
 export const Suggestion = styled.div`
