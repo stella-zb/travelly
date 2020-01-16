@@ -23,6 +23,7 @@
   left: 10px;
 }
 
+
 .slider-wrapper .previousButton svg polygon {
   fill: #FCFCFC;
 }
@@ -33,7 +34,7 @@
 
 .slider-wrapper .nextButton {
   z-index: 9997;
-  margin: 60% 5%;
+  /* margin: 60% 5%; */
   position: absolute;
   right: 10px;
 }
