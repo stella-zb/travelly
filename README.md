@@ -1,3 +1,10 @@
+## Final Product
+
+![alt tag](/docs/login-search.gif)
+![alt tag](/docs/itinerary.gif)
+![alt tag](/docs/filter.gif)
+![alt tag](/docs/map.gif)
+![alt tag](/docs/invite.gif)
 # React + Express No-Fluff Boilerplate
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
