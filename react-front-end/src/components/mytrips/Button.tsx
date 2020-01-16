@@ -18,6 +18,9 @@ const Btn = styled.div`
   display: flex;
   align-items: center;
   align-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Icon = styled.img`

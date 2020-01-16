@@ -122,7 +122,7 @@ module.exports = db => {
           const { lat, lng } = results.data.results[0].geometry.location;
           return Promise.all([
             axios.get(
-              `https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=5&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
+              `https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=20&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
             ),
             axios.get(
               `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=150&key=${HIKING_KEY}`
@@ -134,19 +134,19 @@ module.exports = db => {
           console.log("First api successfully");
           addFSData(res1.data.response.groups[0].items, attractionList);
 
-          return Promise.all(
-            attractionList.map(attraction => {
-              return axios.get(
-                `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
-              );
-            })
-          ).then(results => {
-            attractionList.map((attraction, index) => {
-              attraction.photo =
-                results[index].data.response.photos.items[0].prefix +
-                "500x500" +
-                results[index].data.response.photos.items[0].suffix;
-            });
+          // return Promise.all(
+          //   attractionList.map(attraction => {
+          //     return axios.get(
+          //       `https://api.foursquare.com/v2/venues/${attraction.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}&v=20200120`
+          //     );
+          //   })
+          // ).then(results => {
+          //   attractionList.map((attraction, index) => {
+          //     attraction.photo =
+          //       results[index].data.response.photos.items[0].prefix +
+          //       "500x500" +
+          //       results[index].data.response.photos.items[0].suffix;
+          //   });
           for (let trail of res2.data.trails) {
             if (trail.imgMedium !== "") {
               attractionList.push({
@@ -165,7 +165,7 @@ module.exports = db => {
               });
             }
           }
-          });
+          // });
 
           // for (let event of results[2].data._embedded.events) {
           //   const test = moment.utc(event.dates.start.dateTime).format();
