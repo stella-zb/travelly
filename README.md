@@ -1,6 +1,6 @@
 # Travelly
 
-A collabrative travel itinerary generator app that creates itineraries for users based on their picked attractions, city and travel dates.
+A collaborative travel itinerary generator app that creates itineraries for users based on their picked attractions, city and travel dates.
 
 The app uses Foursquare API and Hiking Project API to provide recommendations, Google Place API (Place AutoComplete, Geolocation and Direction) to create itineraries, and Mapbox to provide a map view for the trip.
 
