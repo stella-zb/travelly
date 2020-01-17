@@ -1,8 +1,15 @@
 # Travelly
-
 A collaborative travel itinerary generator app that creates itineraries for users based on their picked attractions, city and travel dates.
 
 The app uses Foursquare API and Hiking Project API to provide recommendations, Google Place API (Place AutoComplete, Geolocation and Direction) to create itineraries, and Mapbox to provide a map view for the trip.
+
+## Final Product
+
+![alt tag](/docs/login-search.gif)
+![alt tag](/docs/itinerary.gif)
+![alt tag](/docs/filter.gif)
+![alt tag](/docs/map.gif)
+![alt tag](/docs/invite.gif)
 
 ## Tech Stack
 - React
@@ -13,9 +20,9 @@ The app uses Foursquare API and Hiking Project API to provide recommendations, G
 
 
 ## Contributors
-- [Stella](https://github.com/stella-zb)
-- [Michelle](https://github.com/mchllsrgr)
-- [Sherry](https://github.com/sherrynganguyen)
+- [Stella Zhou](https://github.com/stella-zb)
+- [Michelle Siregar](https://github.com/mchllsrgr)
+- [Sherry Nguyen](https://github.com/sherrynganguyen)
 
 
 ## Running the app
