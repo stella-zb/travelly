@@ -95,6 +95,7 @@ export const AttractionList = ({id, attractions, deleteAttraction, setInvite, ge
               deleteAttraction={deleteAttraction}
               firstName={attraction.first_name}
               lastName={attraction.last_name}
+              duration={attraction.visit_duration}
             />
           </AttractionItem>
         ))}

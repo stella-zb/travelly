@@ -75,6 +75,7 @@ export const List = ({ timeslots, deleteAttraction }: PropTypes) => {
     end_time: number;
     first_name: string | null;
     last_name: string | null;
+    visit_duration: number;
   }) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
@@ -140,6 +141,7 @@ export const List = ({ timeslots, deleteAttraction }: PropTypes) => {
               deleteAttraction={deleteAttraction}
               firstName={slot.first_name}
               lastName={slot.last_name}
+              duration={slot.visit_duration}
             />
           </ContentDiv>
         </Timeslot>

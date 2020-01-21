@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
-type PropTypes = {
+type AttractionTypes = {
   id: number;
   name: string;
   img: string;
@@ -9,6 +9,7 @@ type PropTypes = {
   deleteAttraction: any;
   firstName: string | null;
   lastName: string | null;
+  duration: number;
 };
 
 const Name = styled.div`
@@ -57,15 +58,10 @@ const Actions = styled.div`
   bottom: 18px;
 `;
 
-export const Attraction = ({
-  id,
-  name,
-  img,
-  editable,
-  deleteAttraction,
-  firstName,
-  lastName
-}: PropTypes) => {
+
+export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName, duration}: AttractionTypes) => {
+  const [time, setTime] = useState<number>(duration);
+  
   const Container = styled.div`
     padding: 10px 20px 15px 20px;
     background-image: linear-gradient(
@@ -97,6 +93,13 @@ export const Attraction = ({
           <DeleteButton onClick={() => deleteAttraction(id)}>
             DELETE
           </DeleteButton>
+        )}
+        {editable && (
+          <form>
+            <button onClick={() => setTime(time - 3600)}>-</button>
+              <input defaultValue={time / 3600} />
+            <button onClick={() => setTime(time + 3600)}>+</button>
+          </form>
         )}
       </Actions>
     </Container>
