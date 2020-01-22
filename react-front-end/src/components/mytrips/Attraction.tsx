@@ -10,6 +10,7 @@ type AttractionTypes = {
   firstName: string | null;
   lastName: string | null;
   duration: number;
+  updateDuration: any;
 };
 
 const Name = styled.div`
@@ -59,9 +60,11 @@ const Actions = styled.div`
 `;
 
 
-export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName, duration}: AttractionTypes) => {
-  const [time, setTime] = useState<number>(duration);
+
+export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName, duration, updateDuration}: AttractionTypes) => {
   
+  const [time, setTime] = useState<number>(duration);
+
   const Container = styled.div`
     padding: 10px 20px 15px 20px;
     background-image: linear-gradient(
@@ -95,11 +98,12 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, firstName
           </DeleteButton>
         )}
         {editable && (
-          <form>
-            <button onClick={() => setTime(time - 3600)}>-</button>
-              <input defaultValue={time / 3600} />
-            <button onClick={() => setTime(time + 3600)}>+</button>
-          </form>
+          <div>
+            <label>{time}</label>
+            <button onClick={() => updateDuration(id, (duration - 3600))}>-</button>
+              <input defaultValue={duration / 3600} onChange={(e) => updateDuration(id, (Number(e.target.value) * 3600))} />
+            <button onClick={() => updateDuration(id, (duration + 3600))}>+</button>
+          </div>
         )}
       </Actions>
     </Container>

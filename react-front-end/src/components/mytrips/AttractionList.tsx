@@ -54,9 +54,10 @@ type PropTypes = {
   deleteAttraction: any;
   setInvite: any;
   generate: any;
+  updateDuration: any;
 };
 
-export const AttractionList = ({id, attractions, deleteAttraction, setInvite, generate}: PropTypes) => {
+export const AttractionList = ({id, attractions, deleteAttraction, setInvite, generate, updateDuration}: PropTypes) => {
   const [edit, setEdit] = useState<boolean>(false);
 
   const updateItinerary = () => {
@@ -96,6 +97,7 @@ export const AttractionList = ({id, attractions, deleteAttraction, setInvite, ge
               firstName={attraction.first_name}
               lastName={attraction.last_name}
               duration={attraction.visit_duration}
+              updateDuration={updateDuration}
             />
           </AttractionItem>
         ))}
