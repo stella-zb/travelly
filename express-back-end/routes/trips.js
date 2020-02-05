@@ -192,5 +192,15 @@ module.exports = (db) => {
       })
   })
 
+  router.post('/attractions/:attrid', (req, res) => {
+    db.query(`
+      UPDATE attractions
+      SET visit_duration = $1
+      WHERE id = $2;
+    `, [req.body.duration, req.params.attrid])
+    .then((response) => res.sendStatus(200))
+    .catch(() => res.sendStatus(400))
+  })
+
   return router;
 }
