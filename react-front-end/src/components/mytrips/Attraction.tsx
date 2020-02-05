@@ -57,9 +57,21 @@ const Actions = styled.div`
   text-align: right;
   position: relative;
   bottom: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
+const Btn = styled.button`
+  background: #FFF;
+  border-radius: 4px;
+`;
 
+const Duration = styled.input`
+  width: 45px;
+  margin: 0 7px;
+  border-radius: 4px;
+`;
 
 export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName, duration, updateDuration}: AttractionTypes) => {
   
@@ -97,17 +109,16 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, firstName
 
       <Actions>
         {editable && (
+          <div>
+            <Btn onClick={() => setTime(time - 3600)}>-</Btn>
+              <Duration defaultValue={time / 3600} onChange={(e) => setTime(Number(e.target.value) * 3600)} />
+            <Btn onClick={() => setTime(time + 3600)}>+</Btn>
+          </div>
+        )}
+        {editable && (
           <DeleteButton onClick={() => deleteAttraction(id)}>
             DELETE
           </DeleteButton>
-        )}
-        {editable && (
-          <div>
-            <label>{duration}</label>
-            <button onClick={() => setTime(time - 3600)}>-</button>
-              <input defaultValue={time / 3600} onChange={(e) => setTime(Number(e.target.value) * 3600)} />
-            <button onClick={() => setTime(time + 3600)}>+</button>
-          </div>
         )}
       </Actions>
     </Container>
