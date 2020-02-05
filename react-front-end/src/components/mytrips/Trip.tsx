@@ -41,15 +41,21 @@ export const Trip = () => {
           deleteAttraction={deleteAttraction}
           setInvite={() => setInvite(true)}
           generate={generate}
+          updateDuration={updateDuration}
         />;
       }
     }
-    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} setInvite={() => setInvite(true)} />;
+    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} setInvite={() => setInvite(true)} updateDuration={updateDuration} />;
   };
 
   const deleteAttraction = (attrid: number) => {
     axios.delete(`/api/trips/${id}/attractions/${attrid}`)
       .then(() => loadData())
+  }
+
+  const updateDuration = (attrid:number, time:number) => {
+    axios.post(`/api/trips/attractions/${attrid}`, {duration: time})
+    .then(() => loadData())
   }
 
   const loadData = () => {

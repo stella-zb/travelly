@@ -62,9 +62,9 @@ const getIcon = (type: string) => {
   }
 };
 
-type PropTypes = { timeslots: Array<any>; deleteAttraction: any };
+type PropTypes = { timeslots: Array<any>; deleteAttraction: any; updateDuration: any; };
 
-export const List = ({ timeslots, deleteAttraction }: PropTypes) => {
+export const List = ({ timeslots, deleteAttraction, updateDuration }: PropTypes) => {
   const categorizeTimeslot = (slot: {
     id: number;
     attraction_id: number;
@@ -75,6 +75,7 @@ export const List = ({ timeslots, deleteAttraction }: PropTypes) => {
     end_time: number;
     first_name: string | null;
     last_name: string | null;
+    visit_duration: number;
   }) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
@@ -140,6 +141,8 @@ export const List = ({ timeslots, deleteAttraction }: PropTypes) => {
               deleteAttraction={deleteAttraction}
               firstName={slot.first_name}
               lastName={slot.last_name}
+              duration={slot.visit_duration}
+              updateDuration={updateDuration}
             />
           </ContentDiv>
         </Timeslot>

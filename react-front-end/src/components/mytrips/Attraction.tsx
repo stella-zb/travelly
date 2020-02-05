@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
-type PropTypes = {
+type AttractionTypes = {
   id: number;
   name: string;
   img: string;
@@ -9,6 +9,8 @@ type PropTypes = {
   deleteAttraction: any;
   firstName: string | null;
   lastName: string | null;
+  duration: number;
+  updateDuration: any;
 };
 
 const Name = styled.div`
@@ -55,17 +57,26 @@ const Actions = styled.div`
   text-align: right;
   position: relative;
   bottom: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
-export const Attraction = ({
-  id,
-  name,
-  img,
-  editable,
-  deleteAttraction,
-  firstName,
-  lastName
-}: PropTypes) => {
+const Btn = styled.button`
+  background: #FFF;
+  border-radius: 4px;
+`;
+
+const Duration = styled.input`
+  width: 45px;
+  margin: 0 7px;
+  border-radius: 4px;
+`;
+
+export const Attraction = ({id, name, img, editable, deleteAttraction, firstName, lastName, duration, updateDuration}: AttractionTypes) => {
+  
+  const [time, setTime] = useState<number>(duration);
+
   const Container = styled.div`
     padding: 10px 20px 15px 20px;
     background-image: linear-gradient(
@@ -80,6 +91,10 @@ export const Attraction = ({
     height: 100px;
   `;
 
+  useEffect(() => {
+    updateDuration(id, time);
+  }, [time])
+
   return (
     <Container>
       {firstName && (
@@ -93,6 +108,13 @@ export const Attraction = ({
       </Name>
 
       <Actions>
+        {editable && (
+          <div>
+            <Btn onClick={() => setTime(time - 3600)}>-</Btn>
+              <Duration defaultValue={time / 3600} onChange={(e) => setTime(Number(e.target.value) * 3600)} />
+            <Btn onClick={() => setTime(time + 3600)}>+</Btn>
+          </div>
+        )}
         {editable && (
           <DeleteButton onClick={() => deleteAttraction(id)}>
             DELETE

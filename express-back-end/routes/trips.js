@@ -27,7 +27,8 @@ module.exports = (db) => {
     db.query(
       `
       SELECT * FROM timeslots
-      WHERE itinerary_id = $1;
+      WHERE itinerary_id = $1
+      ORDER BY id;
       `, [req.params.id]
     )
       .then((response) => {
@@ -190,6 +191,16 @@ module.exports = (db) => {
       .then((response) => {
         res.json(response.rows)
       })
+  })
+
+  router.post('/attractions/:attrid', (req, res) => {
+    db.query(`
+      UPDATE attractions
+      SET visit_duration = $1
+      WHERE id = $2;
+    `, [req.body.duration, req.params.attrid])
+    .then((response) => res.sendStatus(200))
+    .catch(() => res.sendStatus(400))
   })
 
   return router;
