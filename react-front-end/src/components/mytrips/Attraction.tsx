@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
 type AttractionTypes = {
@@ -79,6 +79,10 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, firstName
     height: 100px;
   `;
 
+  useEffect(() => {
+    updateDuration(id, time);
+  }, [time])
+
   return (
     <Container>
       {firstName && (
@@ -99,10 +103,10 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, firstName
         )}
         {editable && (
           <div>
-            <label>{time}</label>
-            <button onClick={() => updateDuration(id, (duration - 3600))}>-</button>
-              <input defaultValue={duration / 3600} onChange={(e) => updateDuration(id, (Number(e.target.value) * 3600))} />
-            <button onClick={() => updateDuration(id, (duration + 3600))}>+</button>
+            <label>{duration}</label>
+            <button onClick={() => setTime(time - 3600)}>-</button>
+              <input defaultValue={time / 3600} onChange={(e) => setTime(Number(e.target.value) * 3600)} />
+            <button onClick={() => setTime(time + 3600)}>+</button>
           </div>
         )}
       </Actions>

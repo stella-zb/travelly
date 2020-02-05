@@ -55,8 +55,8 @@ export const Trip = () => {
 
   const updateDuration = (attrid:number, time:number) => {
     console.log(`ATTR: ${attrid} || DURATION: ${time}`)
-    // axios.post(`/api/trips/${id}/attractions/${attrid}`, {params: {duration: time}})
-    // .then(() => loadData())
+    axios.post(`/api/trips/${id}/attractions/${attrid}`, {params: {duration: time}})
+    .then(() => loadData())
   }
 
   const loadData = () => {
