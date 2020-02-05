@@ -17,7 +17,7 @@ const NavList = styled.ul`
   padding-left: 0px;
 `;
 
-import { Explore } from "./components/explore";
+import { Explore } from "./components/explore/index";
 const NavItem = styled(NavLink)`
   text-decoration: none;
   color: #000;
