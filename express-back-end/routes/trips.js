@@ -27,7 +27,8 @@ module.exports = (db) => {
     db.query(
       `
       SELECT * FROM timeslots
-      WHERE itinerary_id = $1;
+      WHERE itinerary_id = $1
+      ORDER BY id;
       `, [req.params.id]
     )
       .then((response) => {
